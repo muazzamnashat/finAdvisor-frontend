@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import TransactionsTable from '../components/transaction'
 
-export default function transactions() {
-    return (
-        <div>
-            I am transactions
-        </div>
-    )
+class Transactions extends Component {
+    render(){ 
+        return (
+            <div>
+                <TransactionsTable transactions={this.props.transactions}/>
+            </div>
+        )
+    }
 }
+
+const mapStateToProps = state => {
+    return {transactions: state.transactions}
+}
+
+export default connect(mapStateToProps)(Transactions)

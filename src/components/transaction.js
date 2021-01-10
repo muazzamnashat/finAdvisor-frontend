@@ -14,21 +14,24 @@ const useStyles = makeStyles({
   }
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+// function createData(date, description, category, amount) {
+//   return { date, description, category, amount};
+// }
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24),
-  createData("Ice cream sandwich", 237, 9.0, 37),
-  createData("Eclair", 262, 16.0, 24),
-  createData("Cupcake", 305, 3.7, 67),
-  createData("Gingerbread", 356, 16.0, 49),
-];
+// const rows = [
+//   createData("Frozen yoghurt", 159, 6.0, 24),
+//   createData("Ice cream sandwich", 237, 9.0, 37),
+//   createData("Eclair", 262, 16.0, 24),
+//   createData("Cupcake", 305, 3.7, 67),
+//   createData("Gingerbread", 356, 16.0, 49),
+// ];
 
-export default function TransactionsTable() {
+export default function TransactionsTable(props) {
+    // console.log("I am from ", props.transactions)
   const classes = useStyles();
 
+//   const rows = props.transactions.map(transaction => createData(transaction[0],transaction[1],transaction[2],transaction[3]));
+// console.log(rows)
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -41,15 +44,14 @@ export default function TransactionsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {props.transactions.map((row) => (
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.date}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.description}</TableCell>
+              <TableCell align="right">{row.category}</TableCell>
+              <TableCell align="right">{row.amount}</TableCell>
             </TableRow>
           ))}
         </TableBody>

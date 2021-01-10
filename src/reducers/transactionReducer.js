@@ -1,10 +1,16 @@
-const initialState = []
+const initialState = {
+    transactions: [],
+    requesting: false,
+}
+    
+function transactionReducer (state = [], action ) {
+    switch (action.type) {
 
-function transactionReducer (state = initialState, { type, payload }) {
-    switch (type) {
+    case 'START_ADDING_TRANSACTIONS_REQUEST':
+    return state
 
     case 'ADD_TRANSACTIONS':
-        return { ...state, ...payload }
+        return [...state, action.payload]
 
     default:
         return state
