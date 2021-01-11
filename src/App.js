@@ -5,12 +5,13 @@ import CenteredTabs from './components/navMenu'
 import Dashboard from './components/Dashboard'
 import { connect } from 'react-redux'
 import {fetchTransactions} from './actions/fetchTransactions'
-
+import {fetchCategories} from './actions/fetchCategories'
 
 class App extends Component {
 
   componentDidMount() {
     this.props.fetchTransactions()
+    this.props.fetchCategories()
     // console.log(this.props.transactions)
   }
   render() {
@@ -35,7 +36,8 @@ const mapStateToProps = state => {
  
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTransactions: () => dispatch(fetchTransactions())
+    fetchTransactions: () => dispatch(fetchTransactions()),
+    fetchCategories: () => dispatch(fetchCategories())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,8 +1,3 @@
-const initialState = {
-    transactions: [],
-    requesting: false,
-}
-    
 function transactionReducer (state = [], action ) {
     switch (action.type) {
 
