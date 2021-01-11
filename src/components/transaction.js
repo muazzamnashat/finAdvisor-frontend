@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 export default function TransactionsTable(props) {
     // console.log("I am from ", props.transactions)
   const classes = useStyles();
-
+  const dateFormat = require("dateformat");
 //   const rows = props.transactions.map(transaction => createData(transaction[0],transaction[1],transaction[2],transaction[3]));
 // console.log(rows)
   return (
@@ -47,11 +47,15 @@ export default function TransactionsTable(props) {
           {props.transactions.map((row) => (
             <TableRow key={row.id}>
               <TableCell component="th" scope="row">
-                {row.date}
+                {dateFormat(row.date, "mmmm dS, yyyy")}
               </TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.category}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell align="right">{row.category.name}</TableCell>
+              <TableCell align="right">
+                  {new Intl.NumberFormat("en-US", { style: "currency",
+                                                    currency: "USD"
+                                                  }).format(row.amount)}
+            </TableCell>
             </TableRow>
           ))}
         </TableBody>

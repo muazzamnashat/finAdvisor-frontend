@@ -19,8 +19,6 @@ class App extends Component {
         {/* <CenteredTabs/>
         <Transactions/> */}
         <Transactions/>
-
-        <h1>I am app</h1>
       </div>
     )
   }
