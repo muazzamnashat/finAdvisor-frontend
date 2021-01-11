@@ -6,6 +6,9 @@ import Dashboard from './components/Dashboard'
 import { connect } from 'react-redux'
 import {fetchTransactions} from './actions/fetchTransactions'
 import {fetchCategories} from './actions/fetchCategories'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+
 
 class App extends Component {
 
@@ -16,11 +19,13 @@ class App extends Component {
   }
   render() {
     return(
-      <div>
-        {/* <CenteredTabs/>
-        <Transactions/> */}
-        <Transactions/>
-      </div>
+      <Router>
+        <div>
+          <Route path="/" render={routerProps => <Dashboard {...routerProps} transactions={this.props.transactions}/>} />
+          
+          {/* <Transactions/> */}
+        </div>
+      </Router>
     )
   }
     

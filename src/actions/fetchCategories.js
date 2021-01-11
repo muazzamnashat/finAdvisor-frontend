@@ -5,7 +5,7 @@ export function fetchCategories() {
       dispatch({ type: 'START_ADDING_CATEGORIES_REQUEST' });
       fetch(`${ROOT_URL}/categories`)
         .then(response => response.json())
-        .then(response => {
+        .then(response => { 
             // debugger
            response.forEach(category => dispatch({ type: 'ADD_CATEGORIES', payload: category.name}))
         })

@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders(props) {
+export default function Transactions(props) {
   const rows = props.transactions.map(transaction => {
     return { date: transaction.date , description: transaction.description, category: transaction.category.name, amount: transaction.amount}
       })
@@ -51,7 +51,7 @@ export default function Orders(props) {
     <React.Fragment>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <Title>This is Orders.js #Recent Orders # This will be recent transactions # another div for bills # third div for total spend this month </Title>
+          <Title>Here are all the transactions </Title>
           <Table size="small">
             <TableHead>
               <TableRow>

@@ -10,28 +10,21 @@ import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650
-  }
+    minWidth: 150,
+    maxWidth: 500
+  },
 });
 
-// function createData(date, description, category, amount) {
-//   return { date, description, category, amount};
-// }
 
-// const rows = [
-//   createData("Frozen yoghurt", 159, 6.0, 24),
-//   createData("Ice cream sandwich", 237, 9.0, 37),
-//   createData("Eclair", 262, 16.0, 24),
-//   createData("Cupcake", 305, 3.7, 67),
-//   createData("Gingerbread", 356, 16.0, 49),
-// ];
 
 export default function TransactionsTable(props) {
-    // console.log("I am from ", props.transactions)
+    // debugger
+    console.log("I am from ", props)
   const classes = useStyles();
   const dateFormat = require("dateformat");
-//   const rows = props.transactions.map(transaction => createData(transaction[0],transaction[1],transaction[2],transaction[3]));
-// console.log(rows)
+  const rows = props.transactions.map(transaction => {
+    return { date: transaction.date , description: transaction.description, category: transaction.category.name, amount: transaction.amount}
+      })
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -44,13 +37,13 @@ export default function TransactionsTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.transactions.map((row) => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {dateFormat(row.date, "mmmm dS, yyyy")}
               </TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.category.name}</TableCell>
+              <TableCell align="right">{row.category}</TableCell>
               <TableCell align="right">
                   {new Intl.NumberFormat("en-US", { style: "currency",
                                                     currency: "USD"

@@ -18,11 +18,12 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems,secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-
+import { Route } from 'react-router-dom';
+import Transactions from './transactions'
 
 function Copyright() {
   return (
@@ -118,7 +119,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard({match, transactions}) {
+  // debugger
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -178,21 +180,23 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+              <Route exact path={match.url} render={() => <Chart />}/>
               </Paper>
             </Grid>
             {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+              <Route exact path={match.url} render={() => <Deposits />}/>
+                
               </Paper>
             </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
+            {/* Recent transactions */}
+            {/* <Grid item xs={12}>
+              <Paper className={classes.paper}> */}
+              <Route exact path={match.url} render={() => <Orders transactions={transactions.slice(0,6)}/>}/>
+              <Route path="/transactions" render={() => <Transactions transactions={transactions}/>}/>
+              {/* </Paper>
+            </Grid> */}
           </Grid>
           <Box pt={4}>
             <Copyright />
@@ -202,3 +206,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

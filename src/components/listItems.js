@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import TransactionsTable from './transaction'
 
 export const mainListItems = (
-  <div>
+      <div>
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
@@ -21,12 +21,14 @@ export const mainListItems = (
       <ListItemText primary="Overview" />
     </ListItem>
 
+    
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
-      </ListItemIcon>
+        </ListItemIcon>
       <ListItemText primary="Transactions" />
     </ListItem>
+    
 
     <ListItem button>
       <ListItemIcon>
@@ -48,7 +50,9 @@ export const mainListItems = (
     </ListItem>
 
   </div>
-);
+)
+
+
 
 export const secondaryListItems = (
   <div>
