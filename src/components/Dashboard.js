@@ -21,7 +21,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems,secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
-import Orders from './Orders';
+import RecentTransactions from './recentTransactions';
 import { Route } from 'react-router-dom';
 import Transactions from './transactions'
 
@@ -178,22 +178,22 @@ export default function Dashboard({match, transactions}) {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
+            {/* <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}> */}
               <Route exact path={match.url} render={() => <Chart />}/>
-              </Paper>
-            </Grid>
+              {/* </Paper>
+            </Grid> */}
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
+            {/* <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}> */}
               <Route exact path={match.url} render={() => <Deposits />}/>
                 
-              </Paper>
-            </Grid>
+              {/* </Paper>
+            </Grid> */}
             {/* Recent transactions */}
             {/* <Grid item xs={12}>
               <Paper className={classes.paper}> */}
-              <Route exact path={match.url} render={() => <Orders transactions={transactions.slice(0,6)}/>}/>
+              <Route exact path={match.url} render={() => <RecentTransactions transactions={transactions.slice(0,6)}/>}/>
               <Route path="/transactions" render={() => <Transactions transactions={transactions}/>}/>
               {/* </Paper>
             </Grid> */}

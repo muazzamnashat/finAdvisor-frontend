@@ -3,21 +3,37 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
+import clsx from 'clsx';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   depositContext: {
     flex: 1,
   },
-});
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  fixedHeight: {
+    height: 240,
+  },
+}));
 
 export default function Deposits() {
   const classes = useStyles();
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <React.Fragment>
+       <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
       <Title>Recent Deposits</Title>
       <Typography component="p" variant="h4">
         $3,024.00
@@ -30,6 +46,8 @@ export default function Deposits() {
           View balance
         </Link>
       </div>
+      </Paper>
+            </Grid>
     </React.Fragment>
   );
 }

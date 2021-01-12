@@ -12,6 +12,11 @@ import Title from './Title';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
+import SearchBar from "material-ui-search-bar";
+import Toolbar from "./toolbar"
+// *snip*
+
+  
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -49,9 +54,18 @@ export default function Transactions(props) {
   const classes = useStyles();
   return (
     <React.Fragment>
+
       <Grid item xs={12}>
+      <Toolbar/>
         <Paper className={classes.paper}>
+        {/* <SearchBar
+            style={{float:"right",
+            position: "relative",
+            width: "250px",
+            height: "35px"}}
+          /> */}
           <Title>Here are all the transactions </Title>
+         
           <Table size="small">
             <TableHead>
               <TableRow>

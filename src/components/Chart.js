@@ -3,6 +3,27 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 // import * as Recharts from 'recharts';
 import Title from './Title';
+import clsx from 'clsx';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  depositContext: {
+    flex: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  fixedHeight: {
+    height: 240,
+  },
+}));
+
+
 
 // Generate Sales Data
 function createData(time, amount) {
@@ -23,9 +44,12 @@ const data = [
 
 export default function Chart() {
   const theme = useTheme();
-
+  const classes = useStyles();
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <React.Fragment>
+      <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}>
       <Title>this is charts.js #Today ## this is going to be total spending by category graph </Title>
       <ResponsiveContainer>
         <LineChart
@@ -50,6 +74,8 @@ export default function Chart() {
           <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
         </LineChart>
       </ResponsiveContainer>
+      </Paper>
+            </Grid>
     </React.Fragment>
   );
 

@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders(props) {
+export default function RecentTransactions(props) {
   const rows = props.transactions.map(transaction => {
     return { date: transaction.date , description: transaction.description, category: transaction.category.name, amount: transaction.amount}
       })
