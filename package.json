@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-recharts": "^1.2.1"
+    "babel-plugin-recharts": "^1.2.1",
+    "eslint": "^7.17.0"
   }
 }

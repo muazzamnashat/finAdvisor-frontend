@@ -45,7 +45,6 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 //   createData("Oreo", 437, 18.0, 63, 4.0)
 // ];
 
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -77,9 +76,14 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Date"
+    label: "Date",
   },
-  { id: "description", numeric: true, disablePadding: false, label: "Description" },
+  {
+    id: "description",
+    numeric: true,
+    disablePadding: false,
+    label: "Description",
+  },
   { id: "category", numeric: true, disablePadding: false, label: "Category" },
   { id: "amount", numeric: true, disablePadding: false, label: "Amount" },
 ];
@@ -92,7 +96,7 @@ function EnhancedTableHead(props) {
     orderBy,
     numSelected,
     rowCount,
-    onRequestSort
+    onRequestSort,
   } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -142,27 +146,27 @@ EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
+  rowCount: PropTypes.number.isRequired,
 };
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1)
+    paddingRight: theme.spacing(1),
   },
   highlight:
     theme.palette.type === "light"
       ? {
           color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
+          backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: "1 1 100%"
-  }
+    flex: "1 1 100%",
+  },
 }));
 
 const EnhancedTableToolbar = (props) => {
@@ -172,7 +176,7 @@ const EnhancedTableToolbar = (props) => {
   return (
     <Toolbar
       className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0
+        [classes.highlight]: numSelected > 0,
       })}
     >
       {numSelected > 0 ? (
@@ -213,19 +217,19 @@ const EnhancedTableToolbar = (props) => {
 };
 
 EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired
+  numSelected: PropTypes.number.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   paper: {
     width: "100%",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750
+    minWidth: 750,
   },
   visuallyHidden: {
     border: 0,
@@ -236,8 +240,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     position: "absolute",
     top: 20,
-    width: 1
-  }
+    width: 1,
+  },
 }));
 
 export default function EnhancedTable(props) {
@@ -247,9 +251,14 @@ export default function EnhancedTable(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
 
-  const rows = props.transactions.map(transaction => {
-    return { date: transaction.date , description: transaction.description, category: transaction.category.name, amount: transaction.amount}
-      })
+  const rows = props.transactions.map((transaction) => {
+    return {
+      date: transaction.date,
+      description: transaction.description,
+      category: transaction.category.name,
+      amount: transaction.amount,
+    };
+  });
 
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 

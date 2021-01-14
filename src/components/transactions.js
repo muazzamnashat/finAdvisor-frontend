@@ -1,22 +1,19 @@
-import React from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
+import React from "react";
+import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Title from "./Title";
 
-
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 import SearchBar from "material-ui-search-bar";
-import Toolbar from "./toolbar"
+import Toolbar from "./toolbar";
 // *snip*
-
-  
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -41,31 +38,35 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
   },
 }));
 
 export default function Transactions(props) {
-  const rows = props.transactions.map(transaction => {
-    return { date: transaction.date , description: transaction.description, category: transaction.category.name, amount: transaction.amount}
-      })
+  const rows = props.transactions.map((transaction) => {
+    return {
+      date: transaction.date,
+      description: transaction.description,
+      category: transaction.category.name,
+      amount: transaction.amount,
+    };
+  });
   const classes = useStyles();
   return (
     <React.Fragment>
-
       <Grid item xs={12}>
-      <Toolbar/>
+        <Toolbar />
         <Paper className={classes.paper}>
-        {/* <SearchBar
+          {/* <SearchBar
             style={{float:"right",
             position: "relative",
             width: "250px",
             height: "35px"}}
           /> */}
           <Title>Here are all the transactions </Title>
-         
+
           <Table size="small">
             <TableHead>
               <TableRow>
