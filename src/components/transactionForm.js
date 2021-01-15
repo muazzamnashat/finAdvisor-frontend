@@ -5,11 +5,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import { connect } from "react-redux";
+import { addTransaction } from "../actions/fetchTransactions";
 
-function TransactionForm({ categories, setShowForm }) {
+function TransactionForm({ categories, setShowForm, addTransaction }) {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category_id, setCategory_id] = useState("");
   const [amount, setAmount] = useState(0);
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +25,7 @@ function TransactionForm({ categories, setShowForm }) {
   }));
   const classes = useStyles();
   const handleChange = (event) => {
+    event.preventDefault();
     switch (event.target.name) {
       case "date":
         setDate(event.target.value);
@@ -32,7 +34,7 @@ function TransactionForm({ categories, setShowForm }) {
         setDescription(event.target.value);
         break;
       case "category":
-        setCategory(event.target.value);
+        setCategory_id(event.target.value);
         break;
       case "amount":
         setAmount(event.target.value);
@@ -43,8 +45,10 @@ function TransactionForm({ categories, setShowForm }) {
   };
 
   const handleSubmit = (event) => {
-    const data = { date, category, amount, description };
+    const data = { date, category_id, amount, description };
+    // debugger;
     console.log(data);
+    addTransaction({ transaction: data });
     setShowForm(false);
   };
 
@@ -67,13 +71,14 @@ function TransactionForm({ categories, setShowForm }) {
         <label>Category</label>
         <TextField
           select
-          //   value={currency}
+          name="category"
+          value={category_id}
           onChange={handleChange}
           helperText="Please select a category"
         >
           {categories.map((category, index) => (
-            <MenuItem key={index} value={category}>
-              {category}
+            <MenuItem key={index} value={category.id}>
+              {category.name}
             </MenuItem>
           ))}
         </TextField>
@@ -98,4 +103,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(TransactionForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTransaction: (data) => dispatch(addTransaction(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);
