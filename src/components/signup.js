@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignUp({ user, signupUser }) {
+function SignUp({ signupUser }) {
   const [first_name, setFname] = useState("");
   const [last_name, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -179,11 +179,11 @@ function SignUp({ user, signupUser }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.user,
+//   };
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -191,4 +191,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(SignUp);

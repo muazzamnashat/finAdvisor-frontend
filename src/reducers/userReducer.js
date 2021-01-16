@@ -4,7 +4,7 @@ function userReducer(state = [], action) {
       return state;
 
     case "ADD_USER":
-      return action.payload;
+      return [...state, action.payload];
 
     default:
       return state;

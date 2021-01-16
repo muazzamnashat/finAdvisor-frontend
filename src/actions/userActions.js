@@ -11,6 +11,34 @@ export function signUp(data) {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((response) => dispatch({ type: "ADD_USER", payload: response }));
+      .then((response) => {
+        // debugger;
+        localStorage.token = response.jwt;
+        dispatch({ type: "ADD_USER", payload: response.user });
+      });
+  };
+}
+
+export function login(data) {
+  return (dispatch) => {
+    dispatch({ type: "START_ADDING_USER_REQUEST" });
+    fetch(`${ROOT_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.message) {
+          alert(response.message);
+        } else {
+          localStorage.token = response.jwt;
+          dispatch({ type: "ADD_USER", payload: response.user });
+        }
+        console.log(response);
+        // debugger;
+      });
   };
 }

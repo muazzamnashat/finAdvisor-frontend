@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,13 +12,15 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { connect } from "react-redux";
+import { login } from "../actions/userActions";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Muazzam Nashat
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -46,8 +48,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+function Login({ loginUser }) {
   const classes = useStyles();
+  //   debugger;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = (event) => {
+    event.preventDefault();
+    switch (event.target.name) {
+      case "email":
+        setEmail(event.target.value);
+        break;
+      case "password":
+        setPassword(event.target.value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = { email, password };
+    loginUser(data);
+    // signupUser(data);
+    // debugger;
+    // debugger;
+    // console.log(data);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,7 +88,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +99,7 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -81,6 +111,7 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
           <Button
             type="submit"
@@ -106,3 +137,17 @@ export default function Login() {
     </Container>
   );
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.user,
+//   };
+// };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (data) => dispatch(login(data)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);
