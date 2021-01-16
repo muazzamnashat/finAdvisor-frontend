@@ -8,6 +8,7 @@ import { fetchTransactions } from "./actions/fetchTransactions";
 import { fetchCategories } from "./actions/fetchCategories";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import SignUp from "./components/signup";
+import Login from "./components/login";
 
 class App extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Route exact path="/login" render={(routerProps) => <Login />} />
           <Route exact path="/signup" render={(routerProps) => <SignUp />} />
           <Route
             exact

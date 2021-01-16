@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { connect } from "react-redux";
+import { signUp } from "../actions/userActions";
 
 function Copyright() {
   return (
@@ -46,15 +48,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
-  const [fName, setFname] = useState("");
-  const [lName, setLname] = useState("");
+function SignUp({ user, signupUser }) {
+  const [first_name, setFname] = useState("");
+  const [last_name, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
   const handleChange = (event) => {
-    console.log(fName, lName, email, password);
+    console.log(first_name, last_name, email, password);
     event.preventDefault();
     switch (event.target.name) {
       case "firstName":
@@ -74,6 +76,15 @@ export default function SignUp() {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = { first_name, last_name, email, password };
+    signupUser(data);
+    // debugger;
+    // debugger;
+    // console.log(data);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -84,7 +95,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -107,7 +118,7 @@ export default function SignUp() {
                 id="lastName"
                 label="Last Name"
                 name="lastName"
-                autoComplete="lname"
+                autoComplete="last_name"
                 onChange={handleChange}
               />
             </Grid>
@@ -167,3 +178,17 @@ export default function SignUp() {
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signupUser: (data) => dispatch(signUp(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
