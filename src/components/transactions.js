@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Transactions(props) {
+  // debugger;
   const rows = props.transactions.map((transaction) => {
     return {
       date: transaction.date,

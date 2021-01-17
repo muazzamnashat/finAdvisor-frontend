@@ -6,32 +6,42 @@ import Dashboard from "./components/Dashboard";
 import { connect } from "react-redux";
 import { fetchTransactions } from "./actions/fetchTransactions";
 import { fetchCategories } from "./actions/fetchCategories";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignUp from "./components/signup";
 import Login from "./components/login";
 
 class App extends Component {
   componentDidMount() {
-    // this.props.fetchTransactions();
-    // this.props.fetchCategories();
+    // if (localStorage.token) {
+    this.props.fetchTransactions();
+    this.props.fetchCategories();
+    // }
     // console.log(this.props.transactions)
   }
   render() {
     return (
       <Router>
         <div>
-          <Route exact path="/login" render={(routerProps) => <Login />} />
-          <Route exact path="/signup" render={(routerProps) => <SignUp />} />
-          <Route
-            exact
-            path="/"
-            render={(routerProps) => (
-              <Dashboard
-                {...routerProps}
-                transactions={this.props.transactions}
-              />
-            )}
-          />
+          <Switch>
+            <Route exact path="/login" render={(routerProps) => <Login />} />
+            <Route exact path="/signup" render={(routerProps) => <SignUp />} />
+            <Route
+              path="/"
+              render={(routerProps) => (
+                <Dashboard
+                  {...routerProps}
+                  transactions={this.props.transactions}
+                />
+              )}
+            />
+
+            {/* <Route
+              path="/transactions"
+              render={(routerProps) => (
+                <Transactions transactions={this.props.transactions} />
+              )}
+            /> */}
+          </Switch>
 
           {/* <Transactions/> */}
         </div>
