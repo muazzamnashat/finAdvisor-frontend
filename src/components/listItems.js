@@ -9,51 +9,52 @@ import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import TransactionsTable from "./transaction";
+import { useHistory } from "react-router-dom";
+// import TransactionsTable from "./transaction";
 
-export const mainListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText
-        primary="Overview"
-        onClick={() => (window.location.href = "/")}
-      />
-    </ListItem>
+export default function MainListItems() {
+  const history = useHistory();
 
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText
-        primary="Transactions"
-        onClick={() => (window.location.href = "transactions")}
-      />
-    </ListItem>
+  return (
+    <div>
+      <ListItem button>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Overview" onClick={() => history.push("/")} />
+      </ListItem>
 
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Budgets" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Bills" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Goals # if possible" />
-    </ListItem>
-  </div>
-);
+      <ListItem button>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText
+          primary="Transactions"
+          onClick={() => history.push("/transactions")}
+        />
+      </ListItem>
+
+      <ListItem button>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Budgets" />
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Bills" />
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Goals # if possible" />
+      </ListItem>
+    </div>
+  );
+}
 
 export const secondaryListItems = (
   <div>

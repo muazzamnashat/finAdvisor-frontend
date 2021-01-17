@@ -3,8 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -13,7 +13,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
-import { login } from "../actions/userActions";
+import { isLoggedIn } from "../actions/userActions";
+import { LoginUser } from "../actions/userActions";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -48,11 +50,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login({ loginUser }) {
+function Login({ loginUser, isLoggedIn }) {
   const classes = useStyles();
   //   debugger;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -72,10 +75,7 @@ function Login({ loginUser }) {
     event.preventDefault();
     const data = { email, password };
     loginUser(data);
-    // signupUser(data);
-    // debugger;
-    // debugger;
-    // console.log(data);
+    // console.log(isLoggedIn);
   };
 
   return (
@@ -138,16 +138,17 @@ function Login({ loginUser }) {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.user,
-//   };
-// };
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
+  //   debugger;
   return {
-    loginUser: (data) => dispatch(login(data)),
+    isLoggedIn: state.isLoggedIn,
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (data) => dispatch(LoginUser(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

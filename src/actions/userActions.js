@@ -1,3 +1,5 @@
+// import React from "react";
+// import { useHistory } from "react-router-dom";
 const ROOT_URL = "http://localhost:3000/api/v1";
 
 export function signUp(data) {
@@ -19,7 +21,8 @@ export function signUp(data) {
   };
 }
 
-export function login(data) {
+export function LoginUser(data) {
+  // const history = useHistory();
   return (dispatch) => {
     dispatch({ type: "START_ADDING_USER_REQUEST" });
     fetch(`${ROOT_URL}/login`, {
@@ -36,9 +39,15 @@ export function login(data) {
         } else {
           localStorage.token = response.jwt;
           dispatch({ type: "ADD_USER", payload: response.user });
+          dispatch({ type: "SUCCESS" });
+          // history.push("/");
         }
         console.log(response);
         // debugger;
       });
   };
+}
+
+export function isLoggedIn() {
+  return (dispatch) => dispatch({ type: "SUCCESS" });
 }
