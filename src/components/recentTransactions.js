@@ -11,23 +11,6 @@ import Title from "./Title";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-// const rows = [
-//   createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-//   createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-//   createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-//   createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-//   createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-// ];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
@@ -68,12 +51,12 @@ export default function RecentTransactions(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.description}</TableCell>
-                  <TableCell>{row.category}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
+              {rows.map((row, idx) => (
+                <TableRow key={idx + 1}>
+                  <TableCell key={idx + 2}>{row.date}</TableCell>
+                  <TableCell key={idx + 3}>{row.description}</TableCell>
+                  <TableCell key={idx + 4}>{row.category}</TableCell>
+                  <TableCell key={idx + 5}>{row.amount}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

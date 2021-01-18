@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -11,26 +11,9 @@ import Title from "./Title";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-import SearchBar from "material-ui-search-bar";
 import Toolbar from "./toolbar";
+import { connect } from "react-redux";
 // *snip*
-
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-// const rows = [
-//   createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-//   createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-//   createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-//   createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-//   createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-// ];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -44,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Transactions(props) {
-  // debugger;
+export function Transactions(props) {
+  const [keyword, setKeyword] = useState("");
   const rows = props.transactions.map((transaction) => {
     return {
       date: transaction.date,
@@ -54,19 +37,38 @@ export default function Transactions(props) {
       amount: transaction.amount,
     };
   });
+
   const classes = useStyles();
+
+  const populateTable = () => {
+    return rows.map((row, idx) => {
+      if (keyword === "")
+        return (
+          <TableRow key={idx + 1}>
+            <TableCell key={idx + 2}>{row.date}</TableCell>
+            <TableCell key={idx + 3}>{row.description}</TableCell>
+            <TableCell key={idx + 4}>{row.category}</TableCell>
+            <TableCell key={idx + 5}>{row.amount}</TableCell>
+          </TableRow>
+        );
+      else if (row.description.includes(keyword)) {
+        return (
+          <TableRow key={idx + 1}>
+            <TableCell key={idx + 2}>{row.date}</TableCell>
+            <TableCell key={idx + 3}>{row.description}</TableCell>
+            <TableCell key={idx + 4}>{row.category}</TableCell>
+            <TableCell key={idx + 5}>{row.amount}</TableCell>
+          </TableRow>
+        );
+      } else return;
+    });
+  };
   return (
     <React.Fragment>
       <Grid item xs={12}>
-        <Toolbar />
+        <Toolbar setKeyword={setKeyword} />
         <Paper className={classes.paper}>
-          {/* <SearchBar
-            style={{float:"right",
-            position: "relative",
-            width: "250px",
-            height: "35px"}}
-          /> */}
-          <Title>Here are all the transactions </Title>
+          <Title>Here are all the transactions</Title>
 
           <Table size="small">
             <TableHead>
@@ -77,19 +79,10 @@ export default function Transactions(props) {
                 <TableCell>Amount</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.description}</TableCell>
-                  <TableCell>{row.category}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            <TableBody>{populateTable()}</TableBody>
           </Table>
           <div className={classes.seeMore}>
-            <Link color="primary" href="#" onClick={preventDefault}>
+            <Link color="primary" href="#">
               See more transactions
             </Link>
           </div>

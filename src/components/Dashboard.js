@@ -24,7 +24,7 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import RecentTransactions from "./recentTransactions";
 import { Route } from "react-router-dom";
-import Transactions from "./transactions";
+import { Transactions } from "./transactions";
 
 function Copyright() {
   return (
@@ -203,6 +203,7 @@ export default function Dashboard({ match, transactions }) {
                 // return <h1>I am rendered</h1>;
                 // debugger;
                 return <Transactions transactions={transactions} />;
+                // return <Transactions transactions={transactions} />;
               }}
             />
             <Route exact path={match.url} render={() => <Chart />} />

@@ -23,9 +23,6 @@ class App extends Component {
     // }"
   }
 
-  // componentDidUpdate() {
-  //   console.log(this.props.userAlreadyLogged);
-  // }
   render() {
     return (
       <Router>

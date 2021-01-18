@@ -13,9 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
-import { isLoggedIn } from "../actions/userActions";
 import { LoginUser } from "../actions/userActions";
-import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -55,7 +53,6 @@ function Login({ loginUser, isLoggedIn }) {
   //   debugger;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
 
   const handleChange = (event) => {
     event.preventDefault();

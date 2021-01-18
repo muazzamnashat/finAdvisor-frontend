@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { addTransaction } from "../actions/fetchTransactions";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import { connect } from "react-redux";
 import {
   Box,
   Button,
@@ -26,17 +25,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Toolbar = ({ className, ...rest }) => {
+const Toolbar = (props) => {
   const [showForm, setShowForm] = useState(false);
+
   const classes = useStyles();
 
   const form = () => {
     return <TransactionForm setShowForm={setShowForm} />;
   };
 
-  // debugger
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(event.target.search.value);
+  };
+
+  const handleChange = (event) => {
+    props.setKeyword(event.target.value);
+  };
+
   return (
-    <div className={clsx(classes.root, className)} {...rest}>
+    <div className={clsx(classes.root)}>
       <Box display="flex" justifyContent="flex-end">
         <Button className={classes.importButton}>Import</Button>
         <Button className={classes.exportButton}>Export</Button>
@@ -52,20 +61,24 @@ const Toolbar = ({ className, ...rest }) => {
         <Card>
           <CardContent>
             <Box maxWidth={500}>
-              <TextField
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SvgIcon fontSize="small" color="action">
-                        <SearchIcon />
-                      </SvgIcon>
-                    </InputAdornment>
-                  ),
-                }}
-                placeholder="Search transaction"
-                variant="outlined"
-              />
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SvgIcon fontSize="small" color="action">
+                          <SearchIcon />
+                        </SvgIcon>
+                      </InputAdornment>
+                    ),
+                  }}
+                  placeholder="Search transaction"
+                  variant="outlined"
+                  name="search"
+                  onChange={handleChange}
+                />
+              </form>
             </Box>
           </CardContent>
         </Card>
@@ -79,9 +92,8 @@ Toolbar.propTypes = {
   className: PropTypes.string,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addTransaction: (data) => dispatch(addTransaction(data)),
-  };
+const mapStateToProps = (state) => {
+  return { transactions: state.transactions };
 };
-export default connect(null, mapDispatchToProps)(Toolbar);
+
+export default connect(mapStateToProps)(Toolbar);
