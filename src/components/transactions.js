@@ -13,7 +13,6 @@ import Paper from "@material-ui/core/Paper";
 
 import Toolbar from "./toolbar";
 import { connect } from "react-redux";
-// *snip*
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {

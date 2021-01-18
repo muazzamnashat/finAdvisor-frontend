@@ -6,8 +6,7 @@ export function fetchTransactions() {
     fetch(`${ROOT_URL}/user_transactions`, {
       method: "GET", // or 'PUT'
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMH0.AkKpwRGcfuTSup7bVBwRHgnkVmsoOcvt1eWrKvDj2A0",
+        Authorization: localStorage.token,
       },
     })
       .then((response) => response.json())
@@ -27,17 +26,14 @@ export function addTransaction(data) {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMH0.AkKpwRGcfuTSup7bVBwRHgnkVmsoOcvt1eWrKvDj2A0",
+        Authorization: localStorage.token,
       },
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then((response) => {
-        debugger;
-        response.forEach((resp) =>
-          dispatch({ type: "ADD_TRANSACTIONS", payload: resp })
-        );
+        // debugger;
+        dispatch({ type: "ADD_TRANSACTIONS", payload: response });
       });
   };
 }
