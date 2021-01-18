@@ -12,15 +12,15 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import SignUp from "./components/signup";
-import Login from "./components/login";
+import SignUp from "./containers/SignUp";
+import Login from "./containers/Login";
 
 class App extends Component {
   componentDidMount() {
-    // if (localStorage.token) {
-    this.props.fetchTransactions();
-    this.props.fetchCategories();
-    // }"
+    if (localStorage.token) {
+      this.props.fetchTransactions();
+      this.props.fetchCategories();
+    }
   }
 
   render() {
@@ -71,4 +71,5 @@ const mapDispatchToProps = (dispatch) => {
     fetchCategories: () => dispatch(fetchCategories()),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

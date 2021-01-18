@@ -13,7 +13,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "react-feather";
-import TransactionForm from "./transactionForm";
+import TransactionForm from "./TransactionForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -88,9 +88,9 @@ const Toolbar = (props) => {
   );
 };
 
-Toolbar.propTypes = {
-  className: PropTypes.string,
-};
+// Toolbar.propTypes = {
+//   className: PropTypes.string,
+// };
 
 const mapStateToProps = (state) => {
   return { transactions: state.transactions };

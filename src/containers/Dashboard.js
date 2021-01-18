@@ -18,13 +18,13 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { secondaryListItems } from "../components/listItems";
-import MainListItems from "../components/listItems";
+import { secondaryListItems } from "../components/ListItems";
+import MainListItems from "../components/ListItems";
 import Chart from "../components/Chart";
 import Deposits from "../components/Deposits";
-import RecentTransactions from "../components/recentTransactions";
+import RecentTransactions from "../components/RecentTransactions";
 import { Route } from "react-router-dom";
-import { Transactions } from "../components/transactions";
+import { Transactions } from "./Transactions";
 
 function Copyright() {
   return (
