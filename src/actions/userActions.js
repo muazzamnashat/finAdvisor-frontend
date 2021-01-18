@@ -1,6 +1,7 @@
 // import React from "react";
 // import { useHistory } from "react-router-dom";
 const ROOT_URL = "http://localhost:3000/api/v1";
+import { fetchTransactions } from "./fetchTransactions";
 
 export function signUp(data) {
   return (dispatch) => {
@@ -40,6 +41,9 @@ export function LoginUser(data) {
           localStorage.token = response.jwt;
           dispatch({ type: "ADD_USER", payload: response.user });
           dispatch({ type: "SUCCESS" });
+
+          // load the transactions after login
+          dispatch(fetchTransactions());
           // history.push("/");
         }
         console.log(response);
