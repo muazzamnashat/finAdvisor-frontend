@@ -23,8 +23,9 @@ import MainListItems from "../components/ListItems";
 import Chart from "../components/Chart";
 import Deposits from "../components/Deposits";
 import RecentTransactions from "../components/RecentTransactions";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import { Transactions } from "./Transactions";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 function Copyright() {
   return (
@@ -124,12 +125,19 @@ export default function Dashboard({ match, transactions }) {
   // debugger
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  let history = useHistory();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -162,10 +170,15 @@ export default function Dashboard({ match, transactions }) {
             {/* This is the heading  */}
             Overview
           </Typography>
+
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
+          </IconButton>
+
+          <IconButton color="inherit" onClick={handleLogout}>
+            <ExitToAppIcon />
           </IconButton>
         </Toolbar>
       </AppBar>

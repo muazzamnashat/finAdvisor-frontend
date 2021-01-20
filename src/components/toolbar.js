@@ -36,8 +36,6 @@ const Toolbar = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log(event.target.search.value);
   };
 
   const handleChange = (event) => {

@@ -46,7 +46,6 @@ export function LoginUser(data) {
           dispatch(fetchTransactions());
           // history.push("/");
         }
-        console.log(response);
         // debugger;
       });
   };
