@@ -23,7 +23,7 @@ import MainListItems from "../components/ListItems";
 import Chart from "../components/Chart";
 import Deposits from "../components/Deposits";
 import RecentTransactions from "../components/RecentTransactions";
-import { Route, useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Transactions } from "./Transactions";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
@@ -125,7 +125,6 @@ export default function Dashboard({ match, transactions }) {
   // debugger
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  let history = useHistory();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -196,6 +195,7 @@ export default function Dashboard({ match, transactions }) {
         </div>
         <Divider />
         <List>
+          {/* This is the menu */}
           <MainListItems />
         </List>
         <Divider />
@@ -204,34 +204,15 @@ export default function Dashboard({ match, transactions }) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+          {/* Here we are loading the landing page charts and list with appropriate routing */}
           <Grid container spacing={3}>
-            {/* Chart */}
-            {/* <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}> */}
-
             <Route
               exact
               path="/transactions"
-              render={() => {
-                // return <h1>I am rendered</h1>;
-                // debugger;
-                return <Transactions transactions={transactions} />;
-                // return <Transactions transactions={transactions} />;
-              }}
+              render={() => <Transactions transactions={transactions} />}
             />
             <Route exact path={match.url} render={() => <Chart />} />
-            {/* </Paper>
-            </Grid> */}
-            {/* Recent Deposits */}
-            {/* <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}> */}
             <Route exact path={match.url} render={() => <Deposits />} />
-
-            {/* </Paper>
-            </Grid> */}
-            {/* Recent transactions */}
-            {/* <Grid item xs={12}>
-              <Paper className={classes.paper}> */}
             <Route
               exact
               path={match.url}
@@ -239,9 +220,6 @@ export default function Dashboard({ match, transactions }) {
                 <RecentTransactions transactions={transactions.slice(0, 6)} />
               )}
             />
-
-            {/* </Paper>
-            </Grid> */}
           </Grid>
           <Box pt={4}>
             <Copyright />

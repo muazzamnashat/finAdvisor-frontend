@@ -11,6 +11,7 @@ export const TransactionTableHead = () => {
         <TableCell>Description</TableCell>
         <TableCell>Category</TableCell>
         <TableCell>Amount</TableCell>
+        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );
