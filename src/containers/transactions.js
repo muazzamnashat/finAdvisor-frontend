@@ -3,15 +3,14 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import Title from "../components/Title";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import Toolbar from "../components/Toolbar";
+import { Transaction } from "../components/Transaction";
+import { TransactionTableHead } from "../components/TransactionTableHead";
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -40,27 +39,13 @@ export function Transactions(props) {
 
   const populateTable = () => {
     return rows.map((row, idx) => {
-      if (keyword === "")
-        return (
-          <TableRow key={idx + 1}>
-            <TableCell key={idx + 2}>{row.date}</TableCell>
-            <TableCell key={idx + 3}>{row.description}</TableCell>
-            <TableCell key={idx + 4}>{row.category}</TableCell>
-            <TableCell key={idx + 5}>{row.amount}</TableCell>
-          </TableRow>
-        );
-      else if (row.description.includes(keyword)) {
-        return (
-          <TableRow key={idx + 1}>
-            <TableCell key={idx + 2}>{row.date}</TableCell>
-            <TableCell key={idx + 3}>{row.description}</TableCell>
-            <TableCell key={idx + 4}>{row.category}</TableCell>
-            <TableCell key={idx + 5}>{row.amount}</TableCell>
-          </TableRow>
-        );
-      } else return;
+      if (keyword === "") return <Transaction key={idx} row={row} idx={idx} />;
+      else if (row.description.includes(keyword))
+        return <Transaction key={idx} row={row} idx={idx} />;
+      else return;
     });
   };
+
   return (
     <React.Fragment>
       <Grid item xs={12}>
@@ -69,14 +54,7 @@ export function Transactions(props) {
           <Title>Here are all the transactions</Title>
 
           <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Category</TableCell>
-                <TableCell>Amount</TableCell>
-              </TableRow>
-            </TableHead>
+            <TransactionTableHead />
             <TableBody>{populateTable()}</TableBody>
           </Table>
           <div className={classes.seeMore}>

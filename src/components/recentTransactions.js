@@ -3,13 +3,12 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import { Transaction } from "./Transaction";
+import { TransactionTableHead } from "./TransactionTableHead";
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -42,22 +41,10 @@ export default function RecentTransactions(props) {
             # another div for bills # third div for total spend this month{" "}
           </Title>
           <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Category</TableCell>
-                <TableCell>Amount</TableCell>
-              </TableRow>
-            </TableHead>
+            <TransactionTableHead />
             <TableBody>
               {rows.map((row, idx) => (
-                <TableRow key={idx + 1}>
-                  <TableCell key={idx + 2}>{row.date}</TableCell>
-                  <TableCell key={idx + 3}>{row.description}</TableCell>
-                  <TableCell key={idx + 4}>{row.category}</TableCell>
-                  <TableCell key={idx + 5}>{row.amount}</TableCell>
-                </TableRow>
+                <Transaction key={idx} idx={idx} row={row} />
               ))}
             </TableBody>
           </Table>
