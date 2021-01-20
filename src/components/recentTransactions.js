@@ -44,7 +44,8 @@ export default function RecentTransactions(props) {
             <TransactionTableHead />
             <TableBody>
               {rows.map((row, idx) => (
-                <Transaction key={idx} idx={idx} row={row} />
+                // hide the buttons when displayed on recent transactions table, show showBtn is false
+                <Transaction key={idx} idx={idx} row={row} showBtn={false} />
               ))}
             </TableBody>
           </Table>

@@ -39,9 +39,10 @@ export function Transactions(props) {
 
   const populateTable = () => {
     return rows.map((row, idx) => {
-      if (keyword === "") return <Transaction key={idx} row={row} idx={idx} />;
+      if (keyword === "")
+        return <Transaction key={idx} row={row} idx={idx} showBtn={true} />;
       else if (row.description.includes(keyword))
-        return <Transaction key={idx} row={row} idx={idx} />;
+        return <Transaction key={idx} row={row} idx={idx} showBtn={true} />;
       else return;
     });
   };
