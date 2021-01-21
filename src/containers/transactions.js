@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import Toolbar from "../components/Toolbar";
-import { Transaction } from "../components/Transaction";
+import Transaction from "../components/Transaction";
 import { TransactionTableHead } from "../components/TransactionTableHead";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,8 @@ export function Transactions(props) {
     return {
       date: transaction.date,
       description: transaction.description,
-      category: transaction.category.name,
+      category: transaction.category,
+      category_id: transaction.category_id,
       amount: transaction.amount,
     };
   });

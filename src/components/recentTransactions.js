@@ -7,7 +7,7 @@ import Title from "./Title";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { Transaction } from "./Transaction";
+import Transaction from "./Transaction";
 import { TransactionTableHead } from "./TransactionTableHead";
 
 const useStyles = makeStyles((theme) => ({

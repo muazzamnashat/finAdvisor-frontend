@@ -6,8 +6,7 @@ export function fetchCategories() {
     fetch(`${ROOT_URL}/categories`, {
       method: "GET", // or 'PUT'
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMH0.AkKpwRGcfuTSup7bVBwRHgnkVmsoOcvt1eWrKvDj2A0",
+        Authorization: localStorage.token,
       },
     })
       .then((response) => response.json())
