@@ -44,13 +44,24 @@ export function LoginUser(data) {
 
           // load the transactions after login
           dispatch(fetchTransactions());
-          // history.push("/");
         }
-        // debugger;
       });
   };
 }
 
-export function isLoggedIn() {
-  return (dispatch) => dispatch({ type: "SUCCESS" });
+export function autoLoginUser() {
+  return (dispatch) => {
+    dispatch({ type: "START_ADDING_USER_REQUEST" });
+    fetch(`${ROOT_URL}/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.token,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        dispatch({ type: "ADD_USER", payload: response.user });
+        dispatch({ type: "SUCCESS" });
+      });
+  };
 }

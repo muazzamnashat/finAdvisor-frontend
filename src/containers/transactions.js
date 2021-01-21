@@ -28,11 +28,13 @@ export function Transactions(props) {
   const [keyword, setKeyword] = useState("");
   const rows = props.transactions.map((transaction) => {
     return {
+      id: transaction.id,
       date: transaction.date,
       description: transaction.description,
       category: transaction.category,
       category_id: transaction.category_id,
       amount: transaction.amount,
+      user_id: transaction.user_id,
     };
   });
 

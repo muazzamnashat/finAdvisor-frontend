@@ -14,12 +14,14 @@ import {
 } from "react-router-dom";
 import SignUp from "./containers/SignUp";
 import Login from "./containers/Login";
+import { autoLoginUser } from "./actions/userActions";
 
 class App extends Component {
   componentDidMount() {
     if (localStorage.token) {
       this.props.fetchTransactions();
       this.props.fetchCategories();
+      this.props.autoLoginUser();
     }
   }
 
@@ -65,11 +67,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchTransactions: () => dispatch(fetchTransactions()),
-    fetchCategories: () => dispatch(fetchCategories()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {
+  fetchTransactions,
+  fetchCategories,
+  autoLoginUser,
+})(App);

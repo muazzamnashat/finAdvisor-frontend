@@ -17,10 +17,12 @@ class Transaction extends React.Component {
     currentlyEditingCategory: false,
     currentlyEditingAmount: false,
     data: {
+      id: this.props.row.id,
       date: this.props.row.date,
       description: this.props.row.description,
       category_id: this.props.row.category_id,
       amount: this.props.row.amount,
+      user_id: this.props.row.user_id,
     },
   };
 
@@ -114,6 +116,15 @@ class Transaction extends React.Component {
   };
 
   handleUpdate() {
+    const categoryName = this.props.categories.find(
+      (category) => category.id === this.state.data.category_id
+    ).name;
+    const updatedData = {
+      ...this.state.data,
+      category: { name: categoryName },
+    };
+    this.props.updateTransaction(updatedData);
+
     console.log(this.state.data);
   }
   // hide the buttons when displayed on recent transactions table
@@ -229,7 +240,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTransaction: (data) => dispatch(addTransaction(data)),
+    updateTransaction: (data) =>
+      dispatch({ type: "UPDATE_TRANSACTIONS", payload: data }),
   };
 };
 
