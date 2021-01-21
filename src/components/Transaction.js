@@ -24,28 +24,6 @@ class Transaction extends React.Component {
     },
   };
 
-  componentDidUpdate() {
-    console.log(this.state.data);
-  }
-  handleDate = (event) => {
-    // this.setState({ currentlyEditing: true });
-    console.log(event.target.id);
-  };
-
-  handleDescription = (event) => {
-    this.setState({ currentlyEditing: true });
-    console.log(this.state.currentlyEditing);
-  };
-
-  handleCategory = (event) => {
-    // debugger;
-  };
-
-  handleAmount = (event) => {
-    this.setState({ currentlyEditing: true });
-    console.log(this.state.currentlyEditing);
-  };
-
   handleSwitch = (event) => {
     switch (event.target.id) {
       case "date":
@@ -94,12 +72,9 @@ class Transaction extends React.Component {
   };
 
   handleChange = (event) => {
-    // debugger;
-
     switch (event.target.name) {
       case "date":
         this.setState((prevState) => {
-          //   debugger;
           return {
             ...prevState,
             data: {
@@ -118,7 +93,6 @@ class Transaction extends React.Component {
         });
         break;
       case "category":
-        // debugger;
         this.setState((prevState) => {
           return {
             ...prevState,
@@ -138,13 +112,18 @@ class Transaction extends React.Component {
         break;
     }
   };
+
+  handleUpdate() {
+    console.log(this.state.data);
+  }
   // hide the buttons when displayed on recent transactions table
   showButton() {
+    // debugger;
     if (this.props.showBtn) {
       return (
         <TableCell key={this.props.idx + 6}>
           {this.state.currentlyEditing ? (
-            <DoneIcon id="done" onClick={this.handleSwitch} />
+            <DoneIcon id="done" onClick={this.handleUpdate.bind(this)} />
           ) : (
             <DeleteIcon color="primary" />
           )}
@@ -201,13 +180,13 @@ class Transaction extends React.Component {
               <TextField
                 select
                 name="category"
-                value={this.props.row.category_id}
+                value={this.state.data.category_id}
                 onChange={this.handleChange}
                 helperText="Please select a category"
               >
                 {this.props.categories.map((category, index) => {
                   return (
-                    <MenuItem name="category" key={index} value={category.id}>
+                    <MenuItem key={index} value={category.id}>
                       {category.name}
                     </MenuItem>
                   );
