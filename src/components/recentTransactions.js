@@ -25,10 +25,13 @@ const useStyles = makeStyles((theme) => ({
 export default function RecentTransactions(props) {
   const rows = props.transactions.map((transaction) => {
     return {
+      id: transaction.id,
       date: transaction.date,
       description: transaction.description,
-      category: transaction.category.name,
+      category_id: transaction.category_id,
       amount: transaction.amount,
+      user_id: transaction.user_id,
+      category: transaction.category,
     };
   });
   const classes = useStyles();

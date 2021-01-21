@@ -1,6 +1,5 @@
-// import React from "react";
-// import { useHistory } from "react-router-dom";
 const ROOT_URL = "http://localhost:3000/api/v1";
+
 import { fetchTransactions } from "./fetchTransactions";
 
 export function signUp(data) {

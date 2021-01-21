@@ -8,6 +8,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import MenuItem from "@material-ui/core/MenuItem";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import { updateTransaction } from "../actions/fetchTransactions";
 
 class Transaction extends React.Component {
   state = {
@@ -23,6 +24,7 @@ class Transaction extends React.Component {
       category_id: this.props.row.category_id,
       amount: this.props.row.amount,
       user_id: this.props.row.user_id,
+      category: this.props.row.category,
     },
   };
 
@@ -95,10 +97,18 @@ class Transaction extends React.Component {
         });
         break;
       case "category":
+        const categoryName = this.props.categories.find(
+          (category) => category.id === event.target.value
+        ).name;
+        // debugger;
         this.setState((prevState) => {
           return {
             ...prevState,
-            data: { ...prevState.data, category_id: event.target.value },
+            data: {
+              ...prevState.data,
+              category_id: event.target.value,
+              category: { name: categoryName },
+            },
           };
         });
         break;
@@ -115,7 +125,7 @@ class Transaction extends React.Component {
     }
   };
 
-  handleUpdate() {
+  handleUpdate(event) {
     const categoryName = this.props.categories.find(
       (category) => category.id === this.state.data.category_id
     ).name;
@@ -125,7 +135,16 @@ class Transaction extends React.Component {
     };
     this.props.updateTransaction(updatedData);
 
-    console.log(this.state.data);
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        currentlyEditing: false,
+        currentlyEditingDate: false,
+        currentlyEditingDescription: false,
+        currentlyEditingCategory: false,
+        currentlyEditingAmount: false,
+      };
+    });
   }
   // hide the buttons when displayed on recent transactions table
   showButton() {
@@ -134,10 +153,18 @@ class Transaction extends React.Component {
       return (
         <TableCell key={this.props.idx + 6}>
           {this.state.currentlyEditing ? (
-            <DoneIcon id="done" onClick={this.handleUpdate.bind(this)} />
+            <DoneIcon name="done" onClick={this.handleUpdate.bind(this)} />
           ) : (
             <DeleteIcon color="primary" />
           )}
+        </TableCell>
+      );
+    } else {
+      return (
+        <TableCell key={this.props.idx + 6}>
+          {this.state.currentlyEditing ? (
+            <DoneIcon name="done" onClick={this.handleUpdate.bind(this)} />
+          ) : null}
         </TableCell>
       );
     }
@@ -163,7 +190,7 @@ class Transaction extends React.Component {
               />
             ) : (
               <p id="date" onClick={this.handleSwitch}>
-                <Moment format="MM/DD/YYYY">{this.props.row.date}</Moment>
+                <Moment format="MM/DD/YYYY">{this.state.data.date}</Moment>
               </p>
             )}
           </TableCell>
@@ -174,12 +201,12 @@ class Transaction extends React.Component {
             {this.state.currentlyEditingDescription ? (
               <TextareaAutosize
                 name="description"
-                defaultValue={this.props.row.description}
+                defaultValue={this.state.data.description}
                 onChange={this.handleChange}
               />
             ) : (
               <p id="description" onClick={this.handleSwitch}>
-                {this.props.row.description}
+                {this.state.data.description}
               </p>
             )}
           </TableCell>
@@ -197,7 +224,11 @@ class Transaction extends React.Component {
               >
                 {this.props.categories.map((category, index) => {
                   return (
-                    <MenuItem key={index} value={category.id}>
+                    <MenuItem
+                      key={index}
+                      value={category.id}
+                      name={category.name}
+                    >
                       {category.name}
                     </MenuItem>
                   );
@@ -205,7 +236,7 @@ class Transaction extends React.Component {
               </TextField>
             ) : (
               <p id="category" onClick={this.handleSwitch}>
-                {this.props.row.category.name}
+                {this.state.data.category.name}
               </p>
             )}
           </TableCell>
@@ -217,11 +248,11 @@ class Transaction extends React.Component {
                 type="number"
                 name="amount"
                 onChange={this.handleChange}
-                defaultValue={this.props.row.amount}
+                defaultValue={this.state.data.amount}
               />
             ) : (
               <p id="amount" onClick={this.handleSwitch}>
-                {this.props.row.amount}
+                {this.state.data.amount}
               </p>
             )}
           </TableCell>
@@ -240,8 +271,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTransaction: (data) =>
-      dispatch({ type: "UPDATE_TRANSACTIONS", payload: data }),
+    updateTransaction: (data) => dispatch(updateTransaction(data)),
   };
 };
 

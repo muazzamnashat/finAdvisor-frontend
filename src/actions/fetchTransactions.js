@@ -23,7 +23,7 @@ export function addTransaction(data) {
   return (dispatch) => {
     dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
     fetch(`${ROOT_URL}/transactions`, {
-      method: "POST", // or 'PUT'
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: localStorage.token,
@@ -34,6 +34,25 @@ export function addTransaction(data) {
       .then((response) => {
         // debugger;
         dispatch({ type: "ADD_TRANSACTIONS", payload: response });
+      });
+  };
+}
+
+export function updateTransaction(data) {
+  return (dispatch) => {
+    dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
+    fetch(`${ROOT_URL}/transactions/${data.id}}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.token,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // debugger;
+        dispatch({ type: "UPDATE_TRANSACTIONS", payload: response });
       });
   };
 }

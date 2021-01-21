@@ -10,12 +10,6 @@ function transactionReducer(state = [], action) {
       let updatedTransactionIdx = state.findIndex(
         (transaction) => transaction.id === action.payload.id
       );
-      //   debugger;
-      //   let updatedTransaction = state.find(
-      //     (transaction) => transaction.id === action.payload.id
-      //   );
-      // updatedTransaction = {...updatedTransaction, action.payload }
-      //   let updatedState = state;
       state[updatedTransactionIdx] = action.payload;
       return state;
 
