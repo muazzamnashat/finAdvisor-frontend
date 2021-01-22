@@ -39,6 +39,7 @@ export function addTransaction(data) {
 }
 
 export function updateTransaction(data) {
+  // debugger;
   return (dispatch) => {
     dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
     fetch(`${ROOT_URL}/transactions/${data.id}}`, {
@@ -51,6 +52,7 @@ export function updateTransaction(data) {
     })
       .then((response) => response.json())
       .then((response) => {
+        // debugger;
         dispatch({ type: "UPDATE_TRANSACTIONS", payload: response });
       });
   };

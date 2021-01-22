@@ -10,6 +10,7 @@ export const TransactionTableHead = () => {
         <TableCell>Date</TableCell>
         <TableCell>Description</TableCell>
         <TableCell>Category</TableCell>
+        <TableCell>Type</TableCell>
         <TableCell>Amount</TableCell>
         <TableCell></TableCell>
       </TableRow>

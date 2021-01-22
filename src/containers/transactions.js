@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Transactions(props) {
   const [keyword, setKeyword] = useState("");
-  let rows = props.transactions.map((transaction) => {
+  let sortedData = props.transactions.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+  let rows = sortedData.map((transaction) => {
     return {
       id: transaction.id,
       date: transaction.date,

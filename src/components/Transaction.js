@@ -34,21 +34,21 @@ class Transaction extends React.Component {
     },
   };
 
-  //   showType = () => {
-  //     if (this.state.data.deposit) {
-  //       return (
-  //         <p id="type" onClick={this.handleSwitch}>
-  //           Deposit
-  //         </p>
-  //       );
-  //     } else {
-  //       return (
-  //         <p id="type" onClick={this.handleSwitch}>
-  //           Withdraw
-  //         </p>
-  //       );
-  //     }
-  //   };
+  showType = () => {
+    if (this.state.data.deposit) {
+      return (
+        <p id="type" onClick={this.handleSwitch}>
+          Deposit
+        </p>
+      );
+    } else {
+      return (
+        <p id="type" onClick={this.handleSwitch}>
+          Withdraw
+        </p>
+      );
+    }
+  };
 
   handleSwitch = (event) => {
     switch (event.target.id) {
@@ -120,6 +120,7 @@ class Transaction extends React.Component {
           };
         });
         break;
+
       case "description":
         this.setState((prevState) => {
           return {
@@ -154,6 +155,7 @@ class Transaction extends React.Component {
           };
         });
         break;
+
       case "amount":
         this.setState((prevState) => {
           return {
@@ -162,12 +164,13 @@ class Transaction extends React.Component {
           };
         });
         break;
+
       default:
         break;
     }
   };
 
-  handleUpdate() {
+  handleUpdate = () => {
     const categoryName = this.props.categories.find(
       (category) => category.id === this.state.data.category_id
     ).name;
@@ -188,7 +191,7 @@ class Transaction extends React.Component {
         currentlyEditingAmount: false,
       };
     });
-  }
+  };
 
   //   handleDelete() {
   //     this.props.deleteTransaction(this.state.data.id);
@@ -215,130 +218,126 @@ class Transaction extends React.Component {
           }
         </TableCell>
       );
-    } else {
-      return (
-        <TableCell key={uuid()}>
-          {this.state.currentlyEditing ? (
-            <DoneIcon id="done" onClick={this.handleUpdate.bind(this)} />
-          ) : null}
-        </TableCell>
-      );
     }
   }
   render() {
     // {
-    //   debugger;
+    //   console.log(this.state.data);
     // }
     return (
-      <>
-        <TableRow key={uuid()}>
-          {/* this is date section */}
-          <TableCell key={uuid()}>
-            {this.state.currentlyEditingDate ? (
-              <TextField
-                name="date"
-                label="Date"
-                type="date"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={this.handleChange}
-              />
-            ) : (
-              <p id="date" onClick={this.handleSwitch}>
-                <Moment format="MM/DD/YYYY">{this.state.data.date}</Moment>
-              </p>
-            )}
-          </TableCell>
+      <TableRow>
+        {/* this is date section */}
+        <TableCell>
+          {this.state.currentlyEditingDate ? (
+            <TextField
+              name="date"
+              label="Date"
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={this.handleChange}
+            />
+          ) : (
+            <p id="date" onClick={this.handleSwitch}>
+              <Moment format="MM/DD/YYYY">{this.state.data.date}</Moment>
+            </p>
+          )}
+        </TableCell>
 
-          {/* description */}
+        {/* description */}
 
-          <TableCell key={uuid()}>
-            {this.state.currentlyEditingDescription ? (
-              <TextareaAutosize
-                name="description"
-                defaultValue={this.state.data.description}
-                onChange={this.handleChange}
-              />
-            ) : (
-              <p id="description" onClick={this.handleSwitch}>
-                {this.state.data.description}
-              </p>
-            )}
-          </TableCell>
+        <TableCell>
+          {this.state.currentlyEditingDescription ? (
+            <TextareaAutosize
+              name="description"
+              defaultValue={this.state.data.description}
+              onChange={this.handleChange}
+            />
+          ) : (
+            <p id="description" onClick={this.handleSwitch}>
+              {this.state.data.description}
+            </p>
+          )}
+        </TableCell>
 
-          {/* category */}
+        {/* category */}
 
-          <TableCell key={uuid()}>
-            {this.state.currentlyEditingCategory ? (
-              <TextField
-                select
-                name="category"
-                value={this.state.data.category_id}
-                onChange={this.handleChange}
-                helperText="Please select a category"
-              >
-                {this.props.categories.map((category, index) => {
-                  return (
-                    <MenuItem
-                      key={uuid()}
-                      value={category.id}
-                      name={category.name}
-                    >
-                      {category.name}
-                    </MenuItem>
-                  );
-                })}
-              </TextField>
-            ) : (
-              <p id="category" onClick={this.handleSwitch}>
-                {this.state.data.category.name}
-              </p>
-            )}
-          </TableCell>
+        <TableCell>
+          {this.state.currentlyEditingCategory ? (
+            <TextField
+              select
+              name="category"
+              value={this.state.data.category_id}
+              onChange={this.handleChange}
+              helperText="Please select a category"
+            >
+              {this.props.categories.map((category, index) => {
+                return (
+                  <MenuItem
+                    key={uuid()}
+                    value={category.id}
+                    name={category.name}
+                  >
+                    {category.name}
+                  </MenuItem>
+                );
+              })}
+            </TextField>
+          ) : (
+            <p id="category" onClick={this.handleSwitch}>
+              {this.state.data.category.name}
+            </p>
+          )}
+        </TableCell>
 
-          {/* Type */}
+        {/* Type */}
+        {/* <TableCell>{this.showType()}</TableCell> */}
+        <TableCell>
+          {this.state.currentlyEditingType ? (
+            <TextField
+              select
+              name="type"
+              value={this.state.data.deposit}
+              onChange={this.handleChange}
+              helperText="Please select a type"
+            >
+              {[
+                <MenuItem key={uuid()} value={true}>
+                  Deposit
+                </MenuItem>,
 
-          {/* <TableCell
-            key={this.props.idx + (Math.floor(Math.random() * 10) + 1)}
-          >
-            {this.state.currentlyEditingType ? (
-              <TextField
-                select
-                name="type"
-                value={this.state.data.deposit}
-                onChange={this.handleChange}
-                helperText="Please select a type"
-              >
-                {[
-                  <MenuItem value={true}>Deposit</MenuItem>,
+                <MenuItem key={uuid()} value={false}>
+                  Withdraw
+                </MenuItem>,
+              ]}
+            </TextField>
+          ) : (
+            this.showType()
+          )}
+        </TableCell>
 
-                  <MenuItem value={false}>Withdraw</MenuItem>,
-                ]}
-              </TextField>
-            ) : (
-              this.showType()
-            )}
-          </TableCell> */}
-
-          {/* amount */}
-          <TableCell key={uuid()}>
-            {this.state.currentlyEditingAmount ? (
-              <TextField
-                type="number"
-                name="amount"
-                onChange={this.handleChange}
-                defaultValue={this.state.data.amount}
-              />
-            ) : (
-              <p id="amount" onClick={this.handleSwitch}>
-                {this.state.data.amount}
-              </p>
-            )}
-          </TableCell>
-          {this.showButton()}
-        </TableRow>
-      </>
+        {/* amount */}
+        <TableCell>
+          {this.state.currentlyEditingAmount ? (
+            <TextField
+              type="number"
+              name="amount"
+              onChange={this.handleChange}
+              defaultValue={this.state.data.amount}
+            />
+          ) : (
+            <p id="amount" onClick={this.handleSwitch}>
+              {this.state.data.amount}
+            </p>
+          )}
+        </TableCell>
+        <TableCell>
+          {this.state.currentlyEditing ? (
+            <DoneIcon name="done" onClick={this.handleUpdate} />
+          ) : null}
+        </TableCell>
+      </TableRow>
     );
   }
 }
