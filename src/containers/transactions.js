@@ -11,6 +11,8 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "../components/Toolbar";
 import Transaction from "../components/Transaction";
 import { TransactionTableHead } from "../components/TransactionTableHead";
+import { connect } from "react-redux";
+import uuid from "react-uuid";
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -24,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Transactions(props) {
+function Transactions(props) {
   const [keyword, setKeyword] = useState("");
-  const rows = props.transactions.map((transaction) => {
+  let rows = props.transactions.map((transaction) => {
     return {
       id: transaction.id,
       date: transaction.date,
@@ -35,6 +37,7 @@ export function Transactions(props) {
       category_id: transaction.category_id,
       amount: transaction.amount,
       user_id: transaction.user_id,
+      deposit: transaction.deposit,
     };
   });
 
@@ -43,9 +46,9 @@ export function Transactions(props) {
   const populateTable = () => {
     return rows.map((row, idx) => {
       if (keyword === "")
-        return <Transaction key={idx} row={row} idx={idx} showBtn={true} />;
+        return <Transaction key={uuid()} row={row} showBtn={true} />;
       else if (row.description.includes(keyword))
-        return <Transaction key={idx} row={row} idx={idx} showBtn={true} />;
+        return <Transaction key={uuid()} row={row} showBtn={true} />;
       else return;
     });
   };
@@ -71,3 +74,18 @@ export function Transactions(props) {
     </React.Fragment>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    transactions: state.transactions,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateTransaction: (data) => dispatch(updateTransaction(data)),
+    deleteTransaction: (id) => dispatch(deleteTransaction(id)),
+  };
+};
+
+export default connect(mapStateToProps)(Transactions);

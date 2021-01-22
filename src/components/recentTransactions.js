@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Transaction from "./Transaction";
 import { TransactionTableHead } from "./TransactionTableHead";
+import uuid from "react-uuid";
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -46,9 +47,9 @@ export default function RecentTransactions(props) {
           <Table size="small">
             <TransactionTableHead />
             <TableBody>
-              {rows.map((row, idx) => (
+              {rows.map((row) => (
                 // hide the buttons when displayed on recent transactions table, show showBtn is false
-                <Transaction key={idx} idx={idx} row={row} showBtn={false} />
+                <Transaction key={uuid()} row={row} showBtn={false} />
               ))}
             </TableBody>
           </Table>

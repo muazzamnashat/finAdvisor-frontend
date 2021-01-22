@@ -1,6 +1,7 @@
 const ROOT_URL = "http://localhost:3000/api/v1";
 
 import { fetchTransactions } from "./fetchTransactions";
+import { fetchCategories } from "./fetchCategories";
 
 export function signUp(data) {
   return (dispatch) => {
@@ -43,6 +44,8 @@ export function LoginUser(data) {
 
           // load the transactions after login
           dispatch(fetchTransactions());
+          // load categories after login
+          dispatch(fetchCategories());
         }
       });
   };

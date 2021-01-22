@@ -51,8 +51,21 @@ export function updateTransaction(data) {
     })
       .then((response) => response.json())
       .then((response) => {
-        // debugger;
         dispatch({ type: "UPDATE_TRANSACTIONS", payload: response });
       });
+  };
+}
+
+export function deleteTransaction(id) {
+  return (dispatch) => {
+    dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
+    fetch(`${ROOT_URL}/transactions/${id}}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.token,
+      },
+    }).then((response) => {
+      dispatch({ type: "DELETE_TRANSACTIONS", payload: id });
+    });
   };
 }

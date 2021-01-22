@@ -8,7 +8,11 @@ import DoneIcon from "@material-ui/icons/Done";
 import MenuItem from "@material-ui/core/MenuItem";
 import { connect } from "react-redux";
 import Moment from "react-moment";
-import { updateTransaction } from "../actions/fetchTransactions";
+import {
+  updateTransaction,
+  deleteTransaction,
+} from "../actions/fetchTransactions";
+import uuid from "react-uuid";
 
 class Transaction extends React.Component {
   state = {
@@ -17,6 +21,7 @@ class Transaction extends React.Component {
     currentlyEditingDescription: false,
     currentlyEditingCategory: false,
     currentlyEditingAmount: false,
+    currentlyEditingType: false,
     data: {
       id: this.props.row.id,
       date: this.props.row.date,
@@ -25,8 +30,25 @@ class Transaction extends React.Component {
       amount: this.props.row.amount,
       user_id: this.props.row.user_id,
       category: this.props.row.category,
+      deposit: this.props.row.deposit,
     },
   };
+
+  //   showType = () => {
+  //     if (this.state.data.deposit) {
+  //       return (
+  //         <p id="type" onClick={this.handleSwitch}>
+  //           Deposit
+  //         </p>
+  //       );
+  //     } else {
+  //       return (
+  //         <p id="type" onClick={this.handleSwitch}>
+  //           Withdraw
+  //         </p>
+  //       );
+  //     }
+  //   };
 
   handleSwitch = (event) => {
     switch (event.target.id) {
@@ -56,6 +78,16 @@ class Transaction extends React.Component {
             ...prevState,
             currentlyEditing: true,
             currentlyEditingCategory: true,
+          };
+        });
+        break;
+
+      case "type":
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            currentlyEditing: true,
+            currentlyEditingType: true,
           };
         });
         break;
@@ -96,6 +128,16 @@ class Transaction extends React.Component {
           };
         });
         break;
+
+      case "type":
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            data: { ...prevState.data, deposit: event.target.value },
+          };
+        });
+        break;
+
       case "category":
         const categoryName = this.props.categories.find(
           (category) => category.id === event.target.value
@@ -125,7 +167,7 @@ class Transaction extends React.Component {
     }
   };
 
-  handleUpdate(event) {
+  handleUpdate() {
     const categoryName = this.props.categories.find(
       (category) => category.id === this.state.data.category_id
     ).name;
@@ -133,6 +175,7 @@ class Transaction extends React.Component {
       ...this.state.data,
       category: { name: categoryName },
     };
+
     this.props.updateTransaction(updatedData);
 
     this.setState((prevState) => {
@@ -146,24 +189,37 @@ class Transaction extends React.Component {
       };
     });
   }
+
+  //   handleDelete() {
+  //     this.props.deleteTransaction(this.state.data.id);
+  //     this.setState({});
+  //   }
+
   // hide the buttons when displayed on recent transactions table
   showButton() {
     // debugger;
     if (this.props.showBtn) {
       return (
-        <TableCell key={this.props.idx + 6}>
-          {this.state.currentlyEditing ? (
-            <DoneIcon name="done" onClick={this.handleUpdate.bind(this)} />
-          ) : (
-            <DeleteIcon color="primary" />
-          )}
+        <TableCell key={uuid()}>
+          {
+            this.state.currentlyEditing ? (
+              <DoneIcon name="done" onClick={this.handleUpdate.bind(this)} />
+            ) : null
+            //   (
+            //     <DeleteIcon
+            //       id={this.state.data.id}
+            //       color="primary"
+            //       onClick={this.handleDelete.bind(this)}
+            //     />
+            //   )
+          }
         </TableCell>
       );
     } else {
       return (
-        <TableCell key={this.props.idx + 6}>
+        <TableCell key={uuid()}>
           {this.state.currentlyEditing ? (
-            <DoneIcon name="done" onClick={this.handleUpdate.bind(this)} />
+            <DoneIcon id="done" onClick={this.handleUpdate.bind(this)} />
           ) : null}
         </TableCell>
       );
@@ -175,9 +231,9 @@ class Transaction extends React.Component {
     // }
     return (
       <>
-        <TableRow key={this.props.idx + 1}>
+        <TableRow key={uuid()}>
           {/* this is date section */}
-          <TableCell key={this.props.idx + 2}>
+          <TableCell key={uuid()}>
             {this.state.currentlyEditingDate ? (
               <TextField
                 name="date"
@@ -197,7 +253,7 @@ class Transaction extends React.Component {
 
           {/* description */}
 
-          <TableCell key={this.props.idx + 3}>
+          <TableCell key={uuid()}>
             {this.state.currentlyEditingDescription ? (
               <TextareaAutosize
                 name="description"
@@ -213,7 +269,7 @@ class Transaction extends React.Component {
 
           {/* category */}
 
-          <TableCell key={this.props.idx + 4}>
+          <TableCell key={uuid()}>
             {this.state.currentlyEditingCategory ? (
               <TextField
                 select
@@ -225,7 +281,7 @@ class Transaction extends React.Component {
                 {this.props.categories.map((category, index) => {
                   return (
                     <MenuItem
-                      key={index}
+                      key={uuid()}
                       value={category.id}
                       name={category.name}
                     >
@@ -241,8 +297,32 @@ class Transaction extends React.Component {
             )}
           </TableCell>
 
+          {/* Type */}
+
+          {/* <TableCell
+            key={this.props.idx + (Math.floor(Math.random() * 10) + 1)}
+          >
+            {this.state.currentlyEditingType ? (
+              <TextField
+                select
+                name="type"
+                value={this.state.data.deposit}
+                onChange={this.handleChange}
+                helperText="Please select a type"
+              >
+                {[
+                  <MenuItem value={true}>Deposit</MenuItem>,
+
+                  <MenuItem value={false}>Withdraw</MenuItem>,
+                ]}
+              </TextField>
+            ) : (
+              this.showType()
+            )}
+          </TableCell> */}
+
           {/* amount */}
-          <TableCell key={this.props.idx + 5}>
+          <TableCell key={uuid()}>
             {this.state.currentlyEditingAmount ? (
               <TextField
                 type="number"
@@ -272,6 +352,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateTransaction: (data) => dispatch(updateTransaction(data)),
+    deleteTransaction: (id) => dispatch(deleteTransaction(id)),
   };
 };
 

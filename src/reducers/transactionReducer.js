@@ -10,9 +10,15 @@ function transactionReducer(state = [], action) {
       let updatedTransactionIdx = state.findIndex(
         (transaction) => transaction.id === action.payload.id
       );
-      state[updatedTransactionIdx] = action.payload;
-      return state;
+      let updatedState = [...state];
+      updatedState[updatedTransactionIdx] = action.payload;
+      return updatedState;
 
+    case "DELETE_TRANSACTIONS":
+      const newState = state.filter(
+        (transaction) => transaction.id !== action.payload
+      );
+      return [...newState];
     default:
       return state;
   }

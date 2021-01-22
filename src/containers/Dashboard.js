@@ -24,7 +24,7 @@ import Chart from "../components/Chart";
 import Deposits from "../components/Deposits";
 import RecentTransactions from "../components/RecentTransactions";
 import { Route } from "react-router-dom";
-import { Transactions } from "./Transactions";
+import Transactions from "./Transactions";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 function Copyright() {
@@ -206,11 +206,7 @@ export default function Dashboard({ match, transactions }) {
         <Container maxWidth="lg" className={classes.container}>
           {/* Here we are loading the landing page charts and list with appropriate routing */}
           <Grid container spacing={3}>
-            <Route
-              exact
-              path="/transactions"
-              render={() => <Transactions transactions={transactions} />}
-            />
+            <Route exact path="/transactions" render={() => <Transactions />} />
             <Route exact path={match.url} render={() => <Chart />} />
             <Route exact path={match.url} render={() => <Deposits />} />
             <Route
