@@ -7,7 +7,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
 import MenuItem from "@material-ui/core/MenuItem";
 import { connect } from "react-redux";
-import Moment from "react-moment";
 import {
   updateTransaction,
   deleteTransaction,
@@ -221,9 +220,10 @@ class Transaction extends React.Component {
     }
   }
   render() {
-    // {
-    //   console.log(this.state.data);
-    // }
+    {
+      const date = this.state.data.date.split("T0")[0].split("-");
+      var formattedDate = `${date[1]}-${date[2]}-${date[0]}`;
+    }
     return (
       <TableRow>
         {/* this is date section */}
@@ -240,7 +240,7 @@ class Transaction extends React.Component {
             />
           ) : (
             <p id="date" onClick={this.handleSwitch}>
-              <Moment format="MM/DD/YYYY">{this.state.data.date}</Moment>
+              {formattedDate}
             </p>
           )}
         </TableCell>

@@ -15,6 +15,10 @@ import {
 import SignUp from "./containers/SignUp";
 import Login from "./containers/Login";
 import { autoLoginUser } from "./actions/userActions";
+import {
+  fetchTotalSpend,
+  fetchTotalIncome,
+} from "./actions/transactionsSummary";
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +26,8 @@ class App extends Component {
       this.props.fetchTransactions();
       this.props.fetchCategories();
       this.props.autoLoginUser();
+      this.props.fetchTotalSpend();
+      this.props.fetchTotalIncome();
     }
   }
 
@@ -71,4 +77,6 @@ export default connect(mapStateToProps, {
   fetchTransactions,
   fetchCategories,
   autoLoginUser,
+  fetchTotalSpend,
+  fetchTotalIncome,
 })(App);

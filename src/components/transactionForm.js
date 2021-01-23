@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import { connect } from "react-redux";
 import { addTransaction } from "../actions/fetchTransactions";
+import Moment from "react-moment";
 
 function TransactionForm({ categories, setShowForm, addTransaction }) {
   const [date, setDate] = useState("");

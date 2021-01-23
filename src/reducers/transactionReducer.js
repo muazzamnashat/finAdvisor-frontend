@@ -10,9 +10,7 @@ function transactionReducer(state = [], action) {
       let updatedTransactionIdx = state.findIndex(
         (transaction) => transaction.id === action.payload.id
       );
-      //   let updatedState = [...state];
-      //   updatedState[updatedTransactionIdx] = action.payload;
-      //   return updatedState;
+
       return [
         ...state.slice(0, updatedTransactionIdx),
         action.payload,
@@ -24,6 +22,7 @@ function transactionReducer(state = [], action) {
         (transaction) => transaction.id !== action.payload
       );
       return [...newState];
+
     default:
       return state;
   }

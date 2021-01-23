@@ -7,6 +7,7 @@ import clsx from "clsx";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Moment from "react-moment";
+import { connect } from "react-redux";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -27,21 +28,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Deposits() {
+function Summary(props) {
+  // debugger;
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const today = new Date();
+  const currentMonth = today.toLocaleString("default", {
+    month: "long",
+  });
+
   return (
     <React.Fragment>
       <Grid item xs={12} md={4} lg={3}>
         <Paper className={fixedHeightPaper}>
           <Title>Total spending this month</Title>
-          <Typography component="p" variant="h4">
-            $3,024.00
+          <Typography component="p" variant="h6">
+            $ {props.summary.total_spend.December}
+          </Typography>
+          {/* <Typography color="textSecondary" className={classes.depositContext}>
+            as of <Moment format="D MMM YYYY">{today}</Moment>
+          </Typography> */}
+
+          <Title>Total income this month</Title>
+          <Typography component="p" variant="h6">
+            ${props.summary.total_income.December}
           </Typography>
           <Typography color="textSecondary" className={classes.depositContext}>
             as of <Moment format="D MMM YYYY">{today}</Moment>
           </Typography>
+
           <div>
             <Link color="primary" href="#" onClick={preventDefault}>
               View balance
@@ -52,3 +67,8 @@ export default function Deposits() {
     </React.Fragment>
   );
 }
+
+const mapStateToProps = (state) => {
+  return { summary: state.summary };
+};
+export default connect(mapStateToProps)(Summary);

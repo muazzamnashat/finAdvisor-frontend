@@ -21,7 +21,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { secondaryListItems } from "../components/ListItems";
 import MainListItems from "../components/ListItems";
 import Chart from "../components/Chart";
-import Deposits from "../components/Deposits";
+import Summary from "../components/Summary";
 import RecentTransactions from "../components/RecentTransactions";
 import { Route } from "react-router-dom";
 import Transactions from "./Transactions";
@@ -208,7 +208,7 @@ export default function Dashboard({ match, transactions }) {
           <Grid container spacing={3}>
             <Route exact path="/transactions" render={() => <Transactions />} />
             <Route exact path={match.url} render={() => <Chart />} />
-            <Route exact path={match.url} render={() => <Deposits />} />
+            <Route exact path={match.url} render={() => <Summary />} />
             <Route
               exact
               path={match.url}
