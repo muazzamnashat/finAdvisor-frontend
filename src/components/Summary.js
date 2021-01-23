@@ -43,7 +43,7 @@ function Summary(props) {
         <Paper className={fixedHeightPaper}>
           <Title>Total spending this month</Title>
           <Typography component="p" variant="h6">
-            $ {props.summary.total_spend.December}
+            {/* $ {props.summary.total_spend.December} */}
           </Typography>
           {/* <Typography color="textSecondary" className={classes.depositContext}>
             as of <Moment format="D MMM YYYY">{today}</Moment>
@@ -51,7 +51,7 @@ function Summary(props) {
 
           <Title>Total income this month</Title>
           <Typography component="p" variant="h6">
-            ${props.summary.total_income.December}
+            {/* ${props.summary.total_income.December} */}
           </Typography>
           <Typography color="textSecondary" className={classes.depositContext}>
             as of <Moment format="D MMM YYYY">{today}</Moment>

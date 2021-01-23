@@ -1,4 +1,18 @@
 const ROOT_URL = "http://localhost:3000/api/v1";
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export function fetchTotalSpend() {
   return (dispatch) => {
@@ -13,9 +27,7 @@ export function fetchTotalSpend() {
       .then((response) => {
         // debugger;
         Object.keys(response).forEach((key) => {
-          const monthStr = new Date(key).toLocaleString("default", {
-            month: "long",
-          });
+          const monthStr = months[parseInt(key.split("-")[1]) - 1];
           const payload = { [monthStr]: response[key] };
           //   debugger;
           dispatch({
@@ -40,9 +52,8 @@ export function fetchTotalIncome() {
       .then((response) => {
         // debugger;
         Object.keys(response).forEach((key) => {
-          const monthStr = new Date(key).toLocaleString("default", {
-            month: "long",
-          });
+          //   debugger;
+          const monthStr = months[parseInt(key.split("-")[1]) - 1];
           const payload = { [monthStr]: response[key] };
           //   debugger;
           dispatch({
