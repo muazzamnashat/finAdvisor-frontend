@@ -55,6 +55,24 @@ export function LoginUser(data) {
   };
 }
 
+export function updateUser(data) {
+  return (dispatch) => {
+    dispatch({ type: "START_ADDING_USER_REQUEST" });
+    fetch(`${ROOT_URL}/users/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.token,
+      },
+      body: JSON.stringify({ user: data }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        dispatch({ type: "UPDATE_USER", payload: response });
+      });
+  };
+}
+
 export function autoLoginUser() {
   return (dispatch) => {
     dispatch({ type: "START_ADDING_USER_REQUEST" });

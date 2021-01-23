@@ -19,6 +19,7 @@ import {
   fetchTotalSpend,
   fetchTotalIncome,
 } from "./actions/transactionsSummary";
+import Profile from "./containers/Profile";
 
 class App extends Component {
   componentDidMount() {

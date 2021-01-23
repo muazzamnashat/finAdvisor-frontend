@@ -26,6 +26,7 @@ import RecentTransactions from "../components/RecentTransactions";
 import { Route } from "react-router-dom";
 import Transactions from "./Transactions";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Profile from "./Profile";
 
 function Copyright() {
   return (
@@ -199,7 +200,7 @@ export default function Dashboard({ match, transactions }) {
           <MainListItems />
         </List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -216,6 +217,7 @@ export default function Dashboard({ match, transactions }) {
                 <RecentTransactions transactions={transactions.slice(0, 6)} />
               )}
             />
+            <Route exact path="/profile" render={() => <Profile />} />
           </Grid>
           <Box pt={4}>
             <Copyright />
