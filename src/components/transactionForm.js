@@ -13,6 +13,8 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
   const [category_id, setCategory_id] = useState("");
   const [amount, setAmount] = useState(0);
   const [deposit, setDeposit] = useState("");
+  const [disabled, setDisabled] = useState(true);
+
   const useStyles = makeStyles((theme) => ({
     root: {
       "& .MuiTextField-root": {
@@ -25,23 +27,34 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
     },
   }));
   const classes = useStyles();
+  const validateForm = () => {
+    date && description && category_id && amount
+      ? setDisabled(false)
+      : setDisabled(true);
+  };
   const handleChange = (event) => {
+    validateForm();
     event.preventDefault();
     switch (event.target.name) {
       case "date":
         setDate(event.target.value);
+
         break;
       case "description":
         setDescription(event.target.value);
+
         break;
       case "category":
         setCategory_id(event.target.value);
+
         break;
       case "amount":
         setAmount(event.target.value);
+
         break;
       case "type":
         setDeposit(event.target.value);
+
         break;
       default:
         break;
@@ -64,15 +77,27 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
       onSubmit={handleSubmit}
     >
       <div>
-        <label>Date</label>
-        <TextField type="date" name="date" onChange={handleChange} />
+        <TextField
+          type="date"
+          name="date"
+          onChange={handleChange}
+          helperText="Date of the transaction"
+        />
 
-        <label>Description</label>
-        <TextField type="text" name="description" onChange={handleChange} />
-        <label>Amount</label>
-        <TextField type="number" name="amount" onChange={handleChange} />
+        <TextField
+          type="text"
+          name="description"
+          onChange={handleChange}
+          helperText="Describe the transaction"
+        />
 
-        <label>Category</label>
+        <TextField
+          type="number"
+          name="amount"
+          onChange={handleChange}
+          helperText="Amount"
+        />
+
         <TextField
           select
           name="category"
@@ -87,7 +112,6 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
           ))}
         </TextField>
 
-        <label>Type</label>
         <TextField
           select
           name="type"
@@ -100,6 +124,7 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
         </TextField>
       </div>
       <Button
+        disabled={disabled}
         type="submit"
         variant="contained"
         color="primary"

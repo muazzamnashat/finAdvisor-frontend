@@ -35,7 +35,7 @@ export default function MainListItems() {
         />
       </ListItem>
 
-      <ListItem button>
+      {/* <ListItem button>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
@@ -46,7 +46,7 @@ export default function MainListItems() {
           <BarChartIcon />
         </ListItemIcon>
         <ListItemText primary="Bills" />
-      </ListItem>
+      </ListItem> */}
       <ListItem button>
         <ListItemIcon>
           <PersonIcon />
