@@ -27,6 +27,7 @@ import { Route } from "react-router-dom";
 import Transactions from "./Transactions";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Profile from "./Profile";
+import Tooltip from "@material-ui/core/Tooltip";
 
 function Copyright() {
   return (
@@ -177,9 +178,12 @@ export default function Dashboard({ match, transactions }) {
             </Badge>
           </IconButton>
 
-          <IconButton color="inherit" onClick={handleLogout}>
-            <ExitToAppIcon />
-          </IconButton>
+          {/* logout button */}
+          <Tooltip title="Log Out">
+            <IconButton color="inherit" onClick={handleLogout}>
+              <ExitToAppIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <Drawer

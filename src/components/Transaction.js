@@ -14,6 +14,9 @@ import {
 } from "../actions/fetchTransactions";
 import uuid from "react-uuid";
 import DeleteConfirmation from "./DeleteConfirmation";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+
 class Transaction extends React.Component {
   state = {
     openDialog: false,
@@ -131,19 +134,42 @@ class Transaction extends React.Component {
       return (
         <TableCell key={uuid()}>
           {this.state.currentlyEditing ? (
-            <DoneIcon
-              name="done"
-              color="primary"
-              onClick={this.handleUpdate.bind(this)}
-            />
+            // Tooltips display informative text when users hover over, focus on, or tap an element.
+            <Tooltip title="Click when done">
+              <IconButton>
+                <DoneIcon
+                  name="done"
+                  color="primary"
+                  onClick={this.handleUpdate.bind(this)}
+                  style={{ cursor: "pointer" }}
+                />
+              </IconButton>
+            </Tooltip>
           ) : (
             <>
-              <EditIcon color="primary" name="edit" onClick={this.handleEdit} />
-              <DeleteIcon
-                id={this.state.data.id}
-                color="primary"
-                onClick={this.handleDelete}
-              />
+              {/* Tooltips display informative text when users hover over, focus on, or tap an element. */}
+              <Tooltip title="Edit">
+                <IconButton>
+                  <EditIcon
+                    color="primary"
+                    name="edit"
+                    onClick={this.handleEdit}
+                    style={{ cursor: "pointer" }}
+                  />
+                </IconButton>
+              </Tooltip>
+
+              {/* Tooltips display informative text when users hover over, focus on, or tap an element. */}
+              <Tooltip title="Delete">
+                <IconButton>
+                  <DeleteIcon
+                    id={this.state.data.id}
+                    color="primary"
+                    onClick={this.handleDelete}
+                    style={{ cursor: "pointer" }}
+                  />
+                </IconButton>
+              </Tooltip>
             </>
           )}
         </TableCell>
