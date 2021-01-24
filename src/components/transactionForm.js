@@ -6,6 +6,8 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import { connect } from "react-redux";
 import { addTransaction } from "../actions/fetchTransactions";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 
 function TransactionForm({ categories, setShowForm, addTransaction }) {
   const [date, setDate] = useState("");
@@ -123,6 +125,7 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
           <MenuItem value={false}>Withdraw</MenuItem>]
         </TextField>
       </div>
+
       <Button
         disabled={disabled}
         type="submit"

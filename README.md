@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# finAdvisor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+_finAdvisor_ is a Single Page Application (SPA) that let users add, delete , update and create transactions and help them track their expenses. This is a mvp version created within a very short time and requires future improvement.
 
-## Available Scripts
+frontend: https://github.com/muazzamnashat/finAdvisor-frontend \
+backend: https://github.com/muazzamnashat/finAdvisor-backend \
 
-In the project directory, you can run:
+## Technologies used
 
-### `yarn start`
+- React
+- Redux
+- Material UI
+- Rails
+- JWT Web Token
+- Recharts library
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Secure user authentication with JWT web token.
+- CRUD functionality \* Users can CREATE, READ, UPDATE or DELETE data that belongs to them only
+- Uses Redux thunk middleware to handle asynchronous web requests.
+- Utilizes react-router to implement proper RESTful routing.
+- UI design with Material-UI.
 
-### `yarn test`
+## Future improvements
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- AI chat boot to help decide on financial steps
+- More charts to better visualize transactions and spending
+- Add Goal and Bill section
 
-### `yarn build`
+## Installation & Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Go to https://github.com/muazzamnashat/finAdvisor-frontend to clone the frontend
+- Go to https://github.com/muazzamnashat/finAdvisor-backend to clone the backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Clone the repository onto your computer. To clone :
+- Click on the green "Code" button and select "HTTPS"
+- Copy the link
+- Open your terminal and type pwd to see you current location (The folder you are in). If this is the right folder (this is where you want to clone the repo) or you can change directory.
+- Now, on the terminal type 'git clone' then paste the link.
+- Navigate to the the backend folder
+- Run `bundle install` to load the Ruby gems and dependencies.
+- Run `rails db:create` , `rails db:migrate` and `rails db:seed`to load the the database.
+- Run `rails s` to run the server.
+- Navigate to the frontend repo and run `npm install` and `npm start` to run the app.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contribution
 
-### `yarn eject`
+Please feel free to contribute to the project, and if any bug is found, please contact me at *muazzamhc.nashat@gmail.com*.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## License
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Copyright 2020 Muazzam Nashat
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
