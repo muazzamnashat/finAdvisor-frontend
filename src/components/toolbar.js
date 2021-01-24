@@ -30,10 +30,6 @@ const Toolbar = (props) => {
 
   const classes = useStyles();
 
-  const form = () => {
-    return <TransactionForm setShowForm={setShowForm} />;
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -45,8 +41,6 @@ const Toolbar = (props) => {
   return (
     <div className={clsx(classes.root)}>
       <Box display="flex" justifyContent="flex-end">
-        <Button className={classes.importButton}>Import</Button>
-        <Button className={classes.exportButton}>Export</Button>
         <Button
           color="primary"
           variant="contained"
@@ -81,7 +75,16 @@ const Toolbar = (props) => {
           </CardContent>
         </Card>
       </Box>
-      {showForm ? form() : null}
+
+      {showForm ? (
+        <Box mt={3}>
+          <Card>
+            <Box maxWidth={1500} boxShadow={3} m={1} p={1}>
+              <TransactionForm setShowForm={setShowForm} />
+            </Box>
+          </Card>
+        </Box>
+      ) : null}
     </div>
   );
 };

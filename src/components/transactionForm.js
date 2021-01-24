@@ -6,13 +6,13 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import { connect } from "react-redux";
 import { addTransaction } from "../actions/fetchTransactions";
-import Moment from "react-moment";
 
 function TransactionForm({ categories, setShowForm, addTransaction }) {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [category_id, setCategory_id] = useState("");
   const [amount, setAmount] = useState(0);
+  const [deposit, setDeposit] = useState("");
   const useStyles = makeStyles((theme) => ({
     root: {
       "& .MuiTextField-root": {
@@ -40,13 +40,16 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
       case "amount":
         setAmount(event.target.value);
         break;
+      case "type":
+        setDeposit(event.target.value);
+        break;
       default:
         break;
     }
   };
 
   const handleSubmit = (event) => {
-    const data = { date, category_id, amount, description };
+    const data = { date, category_id, amount, description, deposit };
     // debugger;
     console.log(data);
     addTransaction({ transaction: data });
@@ -82,6 +85,18 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
               {category.name}
             </MenuItem>
           ))}
+        </TextField>
+
+        <label>Type</label>
+        <TextField
+          select
+          name="type"
+          value={deposit}
+          onChange={handleChange}
+          helperText="Please select type"
+        >
+          [ <MenuItem value={true}>Deposit</MenuItem>,
+          <MenuItem value={false}>Withdraw</MenuItem>]
         </TextField>
       </div>
       <Button

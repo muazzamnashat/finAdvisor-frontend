@@ -136,38 +136,23 @@ class Transaction extends React.Component {
           {this.state.currentlyEditing ? (
             // Tooltips display informative text when users hover over, focus on, or tap an element.
             <Tooltip title="Click when done">
-              <IconButton>
-                <DoneIcon
-                  name="done"
-                  color="primary"
-                  onClick={this.handleUpdate.bind(this)}
-                  style={{ cursor: "pointer" }}
-                />
+              <IconButton name="done" onClick={this.handleUpdate.bind(this)}>
+                <DoneIcon color="primary" />
               </IconButton>
             </Tooltip>
           ) : (
             <>
               {/* Tooltips display informative text when users hover over, focus on, or tap an element. */}
               <Tooltip title="Edit">
-                <IconButton>
-                  <EditIcon
-                    color="primary"
-                    name="edit"
-                    onClick={this.handleEdit}
-                    style={{ cursor: "pointer" }}
-                  />
+                <IconButton name="edit" onClick={this.handleEdit}>
+                  <EditIcon color="primary" />
                 </IconButton>
               </Tooltip>
 
               {/* Tooltips display informative text when users hover over, focus on, or tap an element. */}
               <Tooltip title="Delete">
-                <IconButton>
-                  <DeleteIcon
-                    id={this.state.data.id}
-                    color="primary"
-                    onClick={this.handleDelete}
-                    style={{ cursor: "pointer" }}
-                  />
+                <IconButton onClick={this.handleDelete}>
+                  <DeleteIcon color="primary" />
                 </IconButton>
               </Tooltip>
             </>
