@@ -63,11 +63,11 @@ function Summary(props) {
             as of <Moment format="D MMM YYYY">{today}</Moment>
           </Typography>
 
-          <div>
+          {/* <div>
             <Link color="primary" href="#" onClick={preventDefault}>
               View balance
             </Link>
-          </div>
+          </div> */}
         </Paper>
       </Grid>
     </React.Fragment>

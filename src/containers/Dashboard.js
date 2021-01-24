@@ -172,11 +172,13 @@ export default function Dashboard({ match, transactions }) {
             Overview
           </Typography>
 
-          <IconButton color="inherit">
+          {/* For now not gonna user notifications */}
+
+          {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
 
           {/* logout button */}
           <Tooltip title="Log Out">
@@ -212,7 +214,11 @@ export default function Dashboard({ match, transactions }) {
           {/* Here we are loading the landing page charts and list with appropriate routing */}
           <Grid container spacing={3}>
             <Route exact path="/transactions" render={() => <Transactions />} />
-            <Route exact path={match.url} render={() => <Chart />} />
+            <Route
+              exact
+              path={match.url}
+              render={() => <Chart transactions={transactions} />}
+            />
             <Route exact path={match.url} render={() => <Summary />} />
             <Route
               exact

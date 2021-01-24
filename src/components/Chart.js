@@ -1,12 +1,19 @@
-import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import React from "react";
+import { useTheme } from "@material-ui/core/styles";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Label,
+  ResponsiveContainer,
+} from "recharts";
 // import * as Recharts from 'recharts';
-import Title from './Title';
-import clsx from 'clsx';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import Title from "./Title";
+import clsx from "clsx";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -14,69 +21,78 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
   },
   fixedHeight: {
     height: 240,
   },
 }));
 
+export default function Chart({ transactions }) {
+  // debugger;
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  let data = [];
+  for (let i = 0; i < transactions.length; i++) {
+    const transaction = transactions[i];
+    const parseMonth = parseInt(transaction.date.split("T0")[0].split("-")[1]);
+    const parseDay = parseInt(transaction.date.split("T0")[0].split("-")[2]);
+    if (parseMonth == month)
+      data.push({ time: parseDay, amount: transaction.amount });
+  }
 
-
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
-];
-
-export default function Chart() {
+  // debugger;
   const theme = useTheme();
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <React.Fragment>
       <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-      <Title>this is charts.js #Today ## this is going to be total spending by category graph </Title>
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
+        <Paper className={fixedHeightPaper}>
+          <Title>This month's spending by day!</Title>
+          <ResponsiveContainer>
+            <LineChart
+              data={data.sort((a, b) => a.time - b.time)}
+              margin={{
+                top: 16,
+                right: 16,
+                bottom: 18,
+                left: 24,
+              }}
             >
-              Sales ($)
-            </Label>
-          </YAxis>
-          <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
-      </Paper>
-            </Grid>
+              <XAxis
+                interval={2}
+                dataKey="time"
+                stroke={theme.palette.text.secondary}
+              >
+                <Label angle={360} position="bottom">
+                  Day
+                </Label>
+              </XAxis>
+              <YAxis stroke={theme.palette.text.secondary}>
+                <Label
+                  angle={270}
+                  position="left"
+                  style={{
+                    textAnchor: "middle",
+                    fill: theme.palette.text.primary,
+                  }}
+                >
+                  Spend ($)
+                </Label>
+              </YAxis>
+              <Line
+                type="monotone"
+                dataKey="amount"
+                stroke={theme.palette.primary.main}
+                dot={false}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </Paper>
+      </Grid>
     </React.Fragment>
   );
-
 }

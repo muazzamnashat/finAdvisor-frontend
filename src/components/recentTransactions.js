@@ -41,10 +41,7 @@ export default function RecentTransactions(props) {
     <React.Fragment>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <Title>
-            This is Orders.js #Recent Orders # This will be recent transactions
-            # another div for bills # third div for total spend this month{" "}
-          </Title>
+          <Title>Recent Transactions</Title>
           <Table size="small">
             <TransactionTableHead />
             <TableBody>
