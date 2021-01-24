@@ -67,11 +67,6 @@ function Transactions(props) {
             <TransactionTableHead />
             <TableBody>{populateTable()}</TableBody>
           </Table>
-          <div className={classes.seeMore}>
-            <Link color="primary" href="#">
-              See more transactions
-            </Link>
-          </div>
         </Paper>
       </Grid>
     </React.Fragment>

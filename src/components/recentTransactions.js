@@ -33,6 +33,7 @@ export default function RecentTransactions(props) {
       amount: transaction.amount,
       user_id: transaction.user_id,
       category: transaction.category,
+      deposit: transaction.deposit,
     };
   });
   const classes = useStyles();
