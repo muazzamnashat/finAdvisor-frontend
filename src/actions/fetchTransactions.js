@@ -71,10 +71,12 @@ export function deleteTransaction(id) {
       headers: {
         Authorization: localStorage.token,
       },
-    }).then((response) => {
-      dispatch({ type: "DELETE_TRANSACTIONS", payload: id });
-      dispatch(fetchTotalIncome());
-      dispatch(fetchTotalSpend());
-    });
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        dispatch({ type: "DELETE_TRANSACTIONS", payload: response.id });
+        dispatch(fetchTotalIncome());
+        dispatch(fetchTotalSpend());
+      });
   };
 }
