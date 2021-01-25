@@ -7,15 +7,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import DoneIcon from "@material-ui/icons/Done";
 import MenuItem from "@material-ui/core/MenuItem";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 import { connect } from "react-redux";
+import uuid from "react-uuid";
 import {
   updateTransaction,
   deleteTransaction,
 } from "../actions/fetchTransactions";
-import uuid from "react-uuid";
+
 import DeleteConfirmation from "./DeleteConfirmation";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
 
 class Transaction extends React.Component {
   state = {
@@ -30,101 +31,6 @@ class Transaction extends React.Component {
       category: this.props.row.category,
       deposit: this.props.row.deposit,
     },
-  };
-
-  showType = () => {
-    if (this.state.data.deposit) {
-      return <p id="type">Deposit</p>;
-    } else {
-      return <p id="type">Withdraw</p>;
-    }
-  };
-
-  handleEdit = () => {
-    this.setState({ ...this.state, currentlyEditing: true });
-  };
-
-  handleChange = (event) => {
-    switch (event.target.name) {
-      case "date":
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            data: {
-              ...prevState.data,
-              date: event.target.value,
-            },
-          };
-        });
-        break;
-
-      case "description":
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            data: { ...prevState.data, description: event.target.value },
-          };
-        });
-        break;
-
-      case "type":
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            data: { ...prevState.data, deposit: event.target.value },
-          };
-        });
-        break;
-
-      case "category":
-        const categoryName = this.props.categories.find(
-          (category) => category.id === event.target.value
-        ).name;
-        // debugger;
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            data: {
-              ...prevState.data,
-              category_id: event.target.value,
-              category: { name: categoryName },
-            },
-          };
-        });
-        break;
-
-      case "amount":
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            data: { ...prevState.data, amount: parseFloat(event.target.value) },
-          };
-        });
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  handleUpdate = () => {
-    const categoryName = this.props.categories.find(
-      (category) => category.id === this.state.data.category_id
-    ).name;
-    const updatedData = {
-      ...this.state.data,
-      category: { name: categoryName },
-    };
-    this.props.updateTransaction(updatedData);
-  };
-
-  handleDelete = () => {
-    this.setState({ ...this.state, openDialog: true });
-  };
-
-  confirmDelete = (term) => {
-    if (term) this.props.deleteTransaction(this.state.data.id);
-    this.setState({ ...this.state, openDialog: false });
   };
 
   // hide the buttons when displayed on recent transactions table
@@ -161,6 +67,73 @@ class Transaction extends React.Component {
       );
     }
   }
+
+  // show type based on boolean value
+  showType = () => {
+    if (this.state.data.deposit) {
+      return <p id="type">Deposit</p>;
+    } else {
+      return <p id="type">Withdraw</p>;
+    }
+  };
+
+  handleChange = (event) => {
+    if (event.target.name === "category") {
+      const categoryName = this.props.categories.find(
+        (category) => category.id === event.target.value
+      ).name;
+
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          data: {
+            ...prevState.data,
+            category_id: event.target.value,
+            category: { name: categoryName },
+          },
+        };
+      });
+      return;
+    }
+
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        data: {
+          ...prevState.data,
+          [event.target.name]: event.target.value,
+        },
+      };
+    });
+  };
+
+  // when clicked show the edit fields
+  handleEdit = () => {
+    this.setState({ ...this.state, currentlyEditing: true });
+  };
+
+  handleUpdate = () => {
+    const categoryName = this.props.categories.find(
+      (category) => category.id === this.state.data.category_id
+    ).name;
+    const updatedData = {
+      ...this.state.data,
+      category: { name: categoryName },
+    };
+    this.props.updateTransaction(updatedData);
+  };
+
+  //when clicked delete show confirmation component
+
+  handleDelete = () => {
+    this.setState({ ...this.state, openDialog: true });
+  };
+
+  confirmDelete = (term) => {
+    if (term) this.props.deleteTransaction(this.state.data.id);
+    this.setState({ ...this.state, openDialog: false });
+  };
+
   render() {
     {
       var date = this.state.data.date.split("T0")[0].split("-");
@@ -244,7 +217,7 @@ class Transaction extends React.Component {
             {this.state.currentlyEditing ? (
               <TextField
                 select
-                name="type"
+                name="deposit"
                 value={this.state.data.deposit}
                 onChange={this.handleChange}
                 helperText="Please select a type"

@@ -1,4 +1,5 @@
 const ROOT_URL = "http://localhost:3000/api/v1";
+import { fetchTotalSpend, fetchTotalIncome } from "./transactionsSummary";
 
 export function fetchTransactions() {
   return (dispatch) => {
@@ -34,6 +35,8 @@ export function addTransaction(data) {
       .then((response) => {
         // debugger;
         dispatch({ type: "ADD_TRANSACTIONS", payload: response });
+        dispatch(fetchTotalIncome());
+        dispatch(fetchTotalSpend());
       });
   };
 }
@@ -54,6 +57,8 @@ export function updateTransaction(data) {
       .then((response) => {
         // debugger;
         dispatch({ type: "UPDATE_TRANSACTIONS", payload: response });
+        dispatch(fetchTotalIncome());
+        dispatch(fetchTotalSpend());
       });
   };
 }
@@ -68,6 +73,8 @@ export function deleteTransaction(id) {
       },
     }).then((response) => {
       dispatch({ type: "DELETE_TRANSACTIONS", payload: id });
+      dispatch(fetchTotalIncome());
+      dispatch(fetchTotalSpend());
     });
   };
 }

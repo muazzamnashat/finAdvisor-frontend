@@ -7,7 +7,7 @@ function transactionReducer(state = [], action) {
       return [action.payload, ...state];
 
     case "UPDATE_TRANSACTIONS":
-      let updatedTransactionIdx = state.findIndex(
+      const updatedTransactionIdx = state.findIndex(
         (transaction) => transaction.id === action.payload.id
       );
 
