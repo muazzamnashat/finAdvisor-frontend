@@ -127,6 +127,9 @@ export default function Dashboard({ match, transactions }) {
   // debugger
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const sortedData = transactions.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -240,7 +243,7 @@ export default function Dashboard({ match, transactions }) {
               exact
               path={match.url}
               render={() => (
-                <RecentTransactions transactions={transactions.slice(0, 6)} />
+                <RecentTransactions transactions={sortedData.slice(0, 6)} />
               )}
             />
             <Route exact path="/profile" render={() => <Profile />} />
