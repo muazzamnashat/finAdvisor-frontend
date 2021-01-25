@@ -163,7 +163,7 @@ class Transaction extends React.Component {
   }
   render() {
     {
-      const date = this.state.data.date.split("T0")[0].split("-");
+      var date = this.state.data.date.split("T0")[0].split("-");
       var formattedDate = `${date[1]}-${date[2]}-${date[0]}`;
     }
     return (
@@ -185,6 +185,7 @@ class Transaction extends React.Component {
                 name="date"
                 label="Date"
                 type="date"
+                defaultValue={date.join("-")}
                 InputLabelProps={{
                   shrink: true,
                 }}
