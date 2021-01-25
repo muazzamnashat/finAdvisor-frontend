@@ -78,9 +78,6 @@ function SignUp({ signupUser }) {
     event.preventDefault();
     const data = { first_name, last_name, email, password };
     signupUser(data);
-    // debugger;
-    // debugger;
-    // console.log(data);
   };
 
   return (
@@ -145,12 +142,6 @@ function SignUp({ signupUser }) {
                 onChange={handleChange}
               />
             </Grid>
-            {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid> */}
           </Grid>
           <Button
             type="submit"
@@ -176,12 +167,6 @@ function SignUp({ signupUser }) {
     </Container>
   );
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.user,
-//   };
-// };
 
 const mapDispatchToProps = (dispatch) => {
   return {

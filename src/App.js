@@ -40,9 +40,11 @@ class App extends Component {
             <Route exact path="/login">
               {localStorage.token ? <Redirect to="/" /> : <Login />}
             </Route>
-            {/* render={(routerProps) => <Login />} /> */}
-            {/* <Route exact path="/login" render={(routerProps) => <Login />} /> */}
-            <Route exact path="/signup" render={(routerProps) => <SignUp />} />
+
+            <Route exact path="/signup">
+              {localStorage.token ? <Redirect to="/" /> : <SignUp />}
+            </Route>
+
             {localStorage.token ? (
               <Route
                 path="/"
@@ -59,8 +61,6 @@ class App extends Component {
               </Route>
             )}
           </Switch>
-
-          {/* <Transactions/> */}
         </div>
       </Router>
     );
