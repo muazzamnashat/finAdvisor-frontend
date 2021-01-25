@@ -139,6 +139,21 @@ export default function Dashboard({ match, transactions }) {
     window.location.reload();
   };
 
+  const displayHeader = () => {
+    switch (window.location.pathname) {
+      case "/":
+        return "Overview";
+
+      case "/transactions":
+        return "Transactions";
+
+      case "/profile":
+        return "Profile";
+
+      default:
+        break;
+    }
+  };
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -168,8 +183,9 @@ export default function Dashboard({ match, transactions }) {
             noWrap
             className={classes.title}
           >
+            {/* {console.log(window.location.pathname)} */}
             {/* This is the heading  */}
-            Overview
+            {displayHeader()}
           </Typography>
 
           {/* For now not gonna user notifications */}
