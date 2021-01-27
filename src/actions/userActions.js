@@ -24,7 +24,6 @@ export function signUp(data) {
 }
 
 export function LoginUser(data) {
-  // const history = useHistory();
   return (dispatch) => {
     dispatch({ type: "START_ADDING_USER_REQUEST" });
     fetch(`${ROOT_URL}/login`, {
