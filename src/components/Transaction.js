@@ -263,11 +263,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateTransaction: (data) => dispatch(updateTransaction(data)),
-    deleteTransaction: (id) => dispatch(deleteTransaction(id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Transaction);
+export default connect(mapStateToProps, {
+  updateTransaction,
+  deleteTransaction,
+})(Transaction);

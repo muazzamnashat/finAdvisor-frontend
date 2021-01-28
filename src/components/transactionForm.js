@@ -147,10 +147,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addTransaction: (data) => dispatch(addTransaction(data)),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addTransaction: (data) => dispatch(addTransaction(data)),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);
+export default connect(mapStateToProps, { addTransaction })(TransactionForm);
