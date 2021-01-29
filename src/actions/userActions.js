@@ -6,19 +6,32 @@ import { fetchTotalSpend, fetchTotalIncome } from "./transactionsSummary";
 
 export function signUp(data) {
   return (dispatch) => {
+    const body = { user: data };
     dispatch({ type: "START_ADDING_USER_REQUEST" });
     fetch(`${ROOT_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((response) => {
-        // debugger;
-        localStorage.token = response.jwt;
-        dispatch({ type: "ADD_USER", payload: response.user });
+        if (response.error) {
+          alert(response.error);
+        } else {
+          localStorage.token = response.jwt;
+          dispatch({ type: "ADD_USER", payload: response.user });
+
+          dispatch({ type: "SUCCESS" });
+          // load the transactions after login
+          dispatch(fetchTransactions());
+          // load categories after login
+          dispatch(fetchCategories());
+
+          dispatch(fetchTotalSpend());
+          dispatch(fetchTotalIncome());
+        }
       });
   };
 }

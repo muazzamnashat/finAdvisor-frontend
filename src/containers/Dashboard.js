@@ -10,15 +10,15 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
+// import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 // import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import { secondaryListItems } from "../components/ListItems";
+// import NotificationsIcon from "@material-ui/icons/Notifications";
+// import { secondaryListItems } from "../components/ListItems";
 import MainListItems from "../components/ListItems";
 import Chart from "../components/Chart";
 import Summary from "../components/Summary";
@@ -123,9 +123,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// receive prop from app component
+
 export default function Dashboard({ match, transactions }) {
   // debugger
   const classes = useStyles();
+  // use state to keep drawer open or close
   const [open, setOpen] = React.useState(true);
   const sortedData = transactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
@@ -186,8 +189,7 @@ export default function Dashboard({ match, transactions }) {
             noWrap
             className={classes.title}
           >
-            {/* {console.log(window.location.pathname)} */}
-            {/* This is the heading  */}
+            {/* This is the heading, change heading according to the url  */}
             {displayHeader()}
           </Typography>
 
@@ -230,7 +232,7 @@ export default function Dashboard({ match, transactions }) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          {/* Here we are loading the landing page charts and list with appropriate routing */}
+          {/* Here we are loading the landing page and list with appropriate routing */}
           <Grid container spacing={3}>
             <Route exact path="/transactions" render={() => <Transactions />} />
             <Route

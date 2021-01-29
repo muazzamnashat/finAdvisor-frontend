@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import { API } from "./api/API";
-// import Transactions from "./containers/transactions";
-// import CenteredTabs from "./components/navMenu";
 import Dashboard from "./containers/Dashboard";
 import { connect } from "react-redux";
 import { fetchTransactions } from "./actions/fetchTransactions";
@@ -19,7 +16,6 @@ import {
   fetchTotalSpend,
   fetchTotalIncome,
 } from "./actions/transactionsSummary";
-import Profile from "./containers/Profile";
 
 class App extends Component {
   componentDidMount() {

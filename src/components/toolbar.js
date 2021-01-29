@@ -76,6 +76,7 @@ const Toolbar = (props) => {
         </Card>
       </Box>
 
+      {/* show the add transaction form only if the add transaction button is clicked */}
       {showForm ? (
         <Box mt={3}>
           <Card>

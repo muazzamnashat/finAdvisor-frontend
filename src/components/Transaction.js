@@ -15,7 +15,6 @@ import {
   updateTransaction,
   deleteTransaction,
 } from "../actions/fetchTransactions";
-
 import DeleteConfirmation from "./DeleteConfirmation";
 
 class Transaction extends React.Component {

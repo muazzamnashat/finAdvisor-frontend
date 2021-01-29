@@ -16,5 +16,6 @@ export function fetchCategories() {
           dispatch({ type: "ADD_CATEGORIES", payload: category })
         );
       });
+    console.log("fetch categories action");
   };
 }

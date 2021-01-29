@@ -9,11 +9,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 // import * as Recharts from 'recharts';
-import Title from "./Title";
 import clsx from "clsx";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import Title from "./Title";
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -44,6 +44,7 @@ export default function Chart({ transactions }) {
   }
 
   // debugger;
+
   const theme = useTheme();
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);

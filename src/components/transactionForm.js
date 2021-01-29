@@ -6,8 +6,6 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import { connect } from "react-redux";
 import { addTransaction } from "../actions/fetchTransactions";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
 
 function TransactionForm({ categories, setShowForm, addTransaction }) {
   const [date, setDate] = useState("");
@@ -146,11 +144,5 @@ const mapStateToProps = (state) => {
     categories: state.categories,
   };
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addTransaction: (data) => dispatch(addTransaction(data)),
-//   };
-// };
 
 export default connect(mapStateToProps, { addTransaction })(TransactionForm);

@@ -14,6 +14,7 @@ export function fetchTransactions() {
       .then((response) =>
         dispatch({ type: "ADD_TRANSACTIONS", payload: response })
       );
+    // console.log("fetch transactions action");
   };
 }
 
