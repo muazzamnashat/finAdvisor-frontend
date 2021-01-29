@@ -34,11 +34,11 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/login">
+            <Route path="/login">
               {localStorage.token ? <Redirect to="/" /> : <Login />}
             </Route>
 
-            <Route exact path="/signup">
+            <Route path="/signup">
               {localStorage.token ? <Redirect to="/" /> : <SignUp />}
             </Route>
 
