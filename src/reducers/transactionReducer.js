@@ -1,11 +1,11 @@
 function transactionReducer(state = [], action) {
   switch (action.type) {
     case "START_ADDING_TRANSACTIONS_REQUEST":
-      // console.log("This is transaction reducer start request section");
+      console.log("This is transaction reducer start request section");
       return state;
 
     case "ADD_TRANSACTIONS":
-      // console.log("This is transaction reducer adding section");
+      console.log("This is transaction reducer adding section");
       const loadedState = state.concat(action.payload);
       return loadedState;
 

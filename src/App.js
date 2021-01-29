@@ -22,9 +22,7 @@ class App extends Component {
     if (localStorage.token) {
       this.props.fetchTransactions();
       this.props.fetchCategories();
-
       // need autoLoginUser to save user information in redux store and show info on profile section
-
       this.props.autoLoginUser();
       this.props.fetchTotalSpend();
       this.props.fetchTotalIncome();

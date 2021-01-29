@@ -64,7 +64,7 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
   const handleSubmit = (event) => {
     const data = { date, category_id, amount, description, deposit };
     // debugger;
-    console.log(data);
+    // console.log(data);
     addTransaction({ transaction: data });
     setShowForm(false);
   };

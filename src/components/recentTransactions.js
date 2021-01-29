@@ -11,6 +11,8 @@ import Transaction from "./Transaction";
 import { TransactionTableHead } from "./TransactionTableHead";
 import uuid from "react-uuid";
 
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
@@ -20,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+  },
+  link: {
+    cursor: "pointer",
   },
 }));
 
@@ -37,6 +42,7 @@ export default function RecentTransactions(props) {
     };
   });
   const classes = useStyles();
+  const history = useHistory();
   return (
     <React.Fragment>
       <Grid item xs={12}>
@@ -52,7 +58,11 @@ export default function RecentTransactions(props) {
             </TableBody>
           </Table>
           <div className={classes.seeMore}>
-            <Link color="primary" href="/transactions">
+            <Link
+              color="primary"
+              className={classes.link}
+              onClick={() => history.push("/transactions")}
+            >
               See more transactions
             </Link>
           </div>

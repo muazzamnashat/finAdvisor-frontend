@@ -122,12 +122,13 @@ class Transaction extends React.Component {
     this.props.updateTransaction(updatedData);
   };
 
-  //when clicked delete show confirmation component
+  //when clicked delete button, show confirmation component
 
   handleDelete = () => {
     this.setState({ ...this.state, openDialog: true });
   };
 
+  // receive true/false from child component and decide delete action
   confirmDelete = (term) => {
     if (term) this.props.deleteTransaction(this.state.data.id);
     this.setState({ ...this.state, openDialog: false });
@@ -193,7 +194,7 @@ class Transaction extends React.Component {
                 onChange={this.handleChange}
                 helperText="Please select a category"
               >
-                {this.props.categories.map((category, index) => {
+                {this.props.categories.map((category) => {
                   return (
                     <MenuItem
                       key={uuid()}

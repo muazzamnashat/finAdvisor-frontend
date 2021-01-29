@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Transactions(props) {
   const [keyword, setKeyword] = useState("");
-
   const sortedData = props.transactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );

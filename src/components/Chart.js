@@ -35,6 +35,9 @@ export default function Chart({ transactions }) {
   const today = new Date();
   const month = today.getMonth() + 1;
   let data = [];
+
+  // filter only current month data
+
   for (let i = 0; i < transactions.length; i++) {
     const transaction = transactions[i];
     const parseMonth = parseInt(transaction.date.split("T0")[0].split("-")[1]);
@@ -42,8 +45,6 @@ export default function Chart({ transactions }) {
     if (parseMonth == month)
       data.push({ time: parseDay, amount: transaction.amount });
   }
-
-  // debugger;
 
   const theme = useTheme();
   const classes = useStyles();
