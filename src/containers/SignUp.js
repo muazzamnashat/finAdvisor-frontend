@@ -54,7 +54,6 @@ function SignUp({ signupUser }) {
   const classes = useStyles();
 
   const handleChange = (event) => {
-    console.log(first_name, last_name, email, password);
     event.preventDefault();
     switch (event.target.name) {
       case "firstName":
