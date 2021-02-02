@@ -2,6 +2,7 @@
 
 _finAdvisor_ is a Single Page Application (SPA) that let users add, delete , update and create transactions and help them track their expenses. This is a mvp version created within a very short time and requires future improvement.
 
+See the app live here: https://finadvisor-app.herokuapp.com/ \
 frontend: https://github.com/muazzamnashat/finAdvisor-frontend \
 backend: https://github.com/muazzamnashat/finAdvisor-backend \
 
