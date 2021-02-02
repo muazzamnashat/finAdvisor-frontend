@@ -51,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
 function Login({ loginUser, isLoggedIn }) {
   const classes = useStyles();
   //   debugger;
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("123456");
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -94,6 +94,7 @@ function Login({ loginUser, isLoggedIn }) {
             id="email"
             label="Email Address"
             name="email"
+            defaultValue="test@gmail.com"
             autoComplete="email"
             autoFocus
             onChange={handleChange}
@@ -107,6 +108,7 @@ function Login({ loginUser, isLoggedIn }) {
             label="Password"
             type="password"
             id="password"
+            defaultValue="123456"
             autoComplete="current-password"
             onChange={handleChange}
           />
