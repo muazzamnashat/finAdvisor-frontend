@@ -35,7 +35,7 @@ const Profile = ({ user }) => {
             {`${user.first_name} ${user.last_name}`}
           </Typography>
           <Typography color="textSecondary" variant="body1">
-            {`${user.age} ${user.gender}`}
+            {`${user.age || ""} ${user.gender || ""}`}
           </Typography>
           <Typography color="textSecondary" variant="body1">
             <Moment format="D MMM YYYY hh:mm A">{new Date()}</Moment>

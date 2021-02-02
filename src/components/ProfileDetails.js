@@ -60,7 +60,7 @@ class ProfileDetails extends React.Component {
                   name="first_name"
                   onChange={(event) => this.handleChange(event)}
                   required
-                  value={this.state.first_name}
+                  value={this.state.first_name || ""}
                   variant="outlined"
                 />
               </Grid>
@@ -70,7 +70,7 @@ class ProfileDetails extends React.Component {
                   label="Last name"
                   name="last_name"
                   onChange={(event) => this.handleChange(event)}
-                  value={this.state.last_name}
+                  value={this.state.last_name || ""}
                   variant="outlined"
                 />
               </Grid>
@@ -91,7 +91,7 @@ class ProfileDetails extends React.Component {
                   name="income"
                   onChange={(event) => this.handleChange(event)}
                   type="number"
-                  value={this.state.income}
+                  value={this.state.income || ""}
                   variant="outlined"
                 />
               </Grid>
@@ -102,7 +102,7 @@ class ProfileDetails extends React.Component {
                   name="age"
                   onChange={(event) => this.handleChange(event)}
                   type="number"
-                  value={this.state.age}
+                  value={this.state.age || ""}
                   variant="outlined"
                 />
               </Grid>
@@ -112,7 +112,7 @@ class ProfileDetails extends React.Component {
                   label="Gender"
                   name="gender"
                   onChange={(event) => this.handleChange(event)}
-                  value={this.state.gender}
+                  value={this.state.gender || ""}
                   variant="outlined"
                 ></TextField>
               </Grid>
