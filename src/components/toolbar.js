@@ -13,7 +13,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "react-feather";
-import TransactionForm from "./TransactionForm";
+import TransactionForm from "./transactionForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {},

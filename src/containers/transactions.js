@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
 import uuid from "react-uuid";
 import Title from "../components/Title";
-import Toolbar from "../components/Toolbar";
+import Toolbar from "../components/toolbar";
 import Transaction from "../components/Transaction";
 import { TransactionTableHead } from "../components/TransactionTableHead";
 
