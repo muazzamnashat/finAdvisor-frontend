@@ -95,7 +95,7 @@ const Toolbar = (props) => {
 // };
 
 const mapStateToProps = (state) => {
-  return { transactions: state.transactions };
+  return { transactions: state.transactions.list };
 };
 
 export default connect(mapStateToProps)(Toolbar);

@@ -73,7 +73,7 @@ function Transactions(props) {
 
 const mapStateToProps = (state) => {
   return {
-    transactions: state.transactions,
+    transactions: state.transactions.list,
   };
 };
 

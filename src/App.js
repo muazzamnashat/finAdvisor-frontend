@@ -16,6 +16,7 @@ import {
   fetchTotalSpend,
   fetchTotalIncome,
 } from "./actions/transactionsSummary";
+import Backdrop from "./components/BackDrop";
 
 class App extends Component {
   componentDidMount() {
@@ -33,6 +34,8 @@ class App extends Component {
     return (
       <Router>
         <div>
+          {this.props.transactionLoading ? <Backdrop /> : null}
+
           <Switch>
             <Route path="/login">
               {localStorage.token ? <Redirect to="/" /> : <Login />}
@@ -66,8 +69,9 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    transactions: state.transactions,
+    transactions: state.transactions.list,
     userAlreadyLogged: state.isLoggedIn,
+    transactionLoading: state.transactions.loading,
   };
 };
 
