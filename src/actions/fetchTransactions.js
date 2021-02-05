@@ -14,14 +14,14 @@ export function fetchTransactions() {
     })
       .then((response) => response.json())
       .then((response) =>
-        dispatch({ type: "ADD_TRANSACTIONS", payload: response })
+        dispatch({ type: "FETCH_TRANSACTIONS", payload: response })
       );
   };
 }
 
 export function addTransaction(data) {
   return (dispatch) => {
-    dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
+    dispatch({ type: "START_ADDING_TRANSACTION_REQUEST" });
     fetch(`${ROOT_URL}/transactions`, {
       method: "POST",
       headers: {
@@ -33,7 +33,7 @@ export function addTransaction(data) {
       .then((response) => response.json())
       .then((response) => {
         // debugger;
-        dispatch({ type: "ADD_TRANSACTIONS", payload: response });
+        dispatch({ type: "ADD_TRANSACTION", payload: response });
         dispatch(fetchTotalIncome());
         dispatch(fetchTotalSpend());
       });
@@ -43,7 +43,7 @@ export function addTransaction(data) {
 export function updateTransaction(data) {
   // debugger;
   return (dispatch) => {
-    dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
+    dispatch({ type: "START_UPDATING_TRANSACTION_REQUEST" });
     fetch(`${ROOT_URL}/transactions/${data.id}}`, {
       method: "PUT",
       headers: {
@@ -55,7 +55,7 @@ export function updateTransaction(data) {
       .then((response) => response.json())
       .then((response) => {
         // debugger;
-        dispatch({ type: "UPDATE_TRANSACTIONS", payload: response });
+        dispatch({ type: "UPDATE_TRANSACTION", payload: response });
         dispatch(fetchTotalIncome());
         dispatch(fetchTotalSpend());
       });
@@ -64,7 +64,7 @@ export function updateTransaction(data) {
 
 export function deleteTransaction(id) {
   return (dispatch) => {
-    dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
+    dispatch({ type: "START_DELETING_TRANSACTION_REQUEST" });
     fetch(`${ROOT_URL}/transactions/${id}}`, {
       method: "DELETE",
       headers: {
@@ -73,7 +73,7 @@ export function deleteTransaction(id) {
     })
       .then((response) => response.json())
       .then((response) => {
-        dispatch({ type: "DELETE_TRANSACTIONS", payload: response.id });
+        dispatch({ type: "DELETE_TRANSACTION", payload: response.id });
         dispatch(fetchTotalIncome());
         dispatch(fetchTotalSpend());
       });

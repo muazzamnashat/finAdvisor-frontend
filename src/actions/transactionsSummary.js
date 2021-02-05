@@ -18,7 +18,7 @@ const months = [
 
 export function fetchTotalSpend() {
   return (dispatch) => {
-    dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
+    dispatch({ type: "START_ADDING_TOTAL_SPEND" });
     fetch(`${ROOT_URL}/total_spend`, {
       method: "GET",
       headers: {
@@ -43,7 +43,7 @@ export function fetchTotalSpend() {
 
 export function fetchTotalIncome() {
   return (dispatch) => {
-    dispatch({ type: "START_ADDING_TRANSACTIONS_REQUEST" });
+    dispatch({ type: "START_ADDING_TOTAL_INCOME" });
     fetch(`${ROOT_URL}/total_income`, {
       method: "GET",
       headers: {
