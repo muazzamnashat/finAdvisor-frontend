@@ -38,23 +38,18 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
     switch (event.target.name) {
       case "date":
         setDate(event.target.value);
-
         break;
       case "description":
         setDescription(event.target.value);
-
         break;
       case "category":
         setCategory_id(event.target.value);
-
         break;
       case "amount":
         setAmount(event.target.value);
-
         break;
       case "type":
         setDeposit(event.target.value);
-
         break;
       default:
         break;

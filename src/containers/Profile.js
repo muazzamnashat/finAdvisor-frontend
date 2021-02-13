@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import Profile from "../components/Profile";
+// import ProfileDetails from "../components/ProfileDetails";
 import ProfileDetails from "../components/ProfileDetails";
 import { connect } from "react-redux";
 
