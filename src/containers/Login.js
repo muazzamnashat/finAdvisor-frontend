@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { LoginUser } from "../actions/userActions";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 function Copyright() {
   return (
@@ -53,6 +54,7 @@ function Login({ loginUser, isLoggedIn }) {
   //   debugger;
   const [email, setEmail] = useState("test@gmail.com");
   const [password, setPassword] = useState("123456");
+  const [showLoading, setShowLoading] = useState(false);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -71,6 +73,7 @@ function Login({ loginUser, isLoggedIn }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { email, password };
+    setShowLoading(true);
     loginUser(data);
     // console.log(isLoggedIn);
   };
@@ -78,6 +81,7 @@ function Login({ loginUser, isLoggedIn }) {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -85,6 +89,7 @@ function Login({ loginUser, isLoggedIn }) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        {showLoading && !isLoggedIn ? <CircularProgress /> : null}
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"

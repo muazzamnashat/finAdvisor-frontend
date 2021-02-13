@@ -54,7 +54,6 @@ export function LoginUser(data) {
         } else {
           localStorage.token = response.jwt;
           dispatch({ type: "ADD_USER", payload: response.user });
-          dispatch({ type: "SUCCESS" });
 
           // load the transactions after login
           dispatch(fetchTransactions());
@@ -63,6 +62,8 @@ export function LoginUser(data) {
 
           dispatch(fetchTotalSpend());
           dispatch(fetchTotalIncome());
+
+          dispatch({ type: "SUCCESS" });
         }
       });
   };
