@@ -11,16 +11,18 @@ import Title from "../components/Title";
 import Toolbar from "../components/toolbar";
 import Transaction from "../components/Transaction";
 import { TransactionTableHead } from "../components/TransactionTableHead";
+import TablePagination from "@material-ui/core/TablePagination";
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(0),
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+    maxHeight: 800,
   },
 }));
 
@@ -46,13 +48,27 @@ function Transactions(props) {
   const classes = useStyles();
 
   const populateTable = () => {
-    return rows.map((row) => {
-      if (keyword === "")
-        return <Transaction key={uuid()} row={row} showBtn={true} />;
-      else if (row.description.includes(keyword))
-        return <Transaction key={uuid()} row={row} showBtn={true} />;
-      else return;
-    });
+    return rows
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map((row) => {
+        if (keyword === "")
+          return <Transaction key={uuid()} row={row} showBtn={true} />;
+        else if (row.description.includes(keyword))
+          return <Transaction key={uuid()} row={row} showBtn={true} />;
+        else return;
+      });
+  };
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   return (
@@ -60,12 +76,20 @@ function Transactions(props) {
       <Grid item xs={12}>
         <Toolbar setKeyword={setKeyword} />
         <Paper className={classes.paper}>
-          <Title>Here are all the transactions</Title>
-          <Table size="small">
+          <Table size="small" stickyHeader>
             <TransactionTableHead />
             <TableBody>{populateTable()}</TableBody>
           </Table>
         </Paper>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </Grid>
     </React.Fragment>
   );
