@@ -12,21 +12,18 @@ export default function MainListItems() {
 
   return (
     <div>
-      <ListItem button>
+      <ListItem button onClick={() => history.push("/")}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Overview" onClick={() => history.push("/")} />
+        <ListItemText primary="Overview" />
       </ListItem>
 
-      <ListItem button>
+      <ListItem button onClick={() => history.push("/transactions")}>
         <ListItemIcon>
           <AccountBalanceIcon />
         </ListItemIcon>
-        <ListItemText
-          primary="Transactions"
-          onClick={() => history.push("/transactions")}
-        />
+        <ListItemText primary="Transactions" />
       </ListItem>
 
       {/* <ListItem button>
@@ -41,14 +38,11 @@ export default function MainListItems() {
         </ListItemIcon>
         <ListItemText primary="Bills" />
       </ListItem> */}
-      <ListItem button>
+      <ListItem button onClick={() => history.push("/profile")}>
         <ListItemIcon>
           <PersonIcon />
         </ListItemIcon>
-        <ListItemText
-          primary="Profile"
-          onClick={() => history.push("/profile")}
-        />
+        <ListItemText primary="Profile" />
       </ListItem>
     </div>
   );
