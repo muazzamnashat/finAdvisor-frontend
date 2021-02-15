@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
 import uuid from "react-uuid";
-import Title from "../components/Title";
 import Toolbar from "../components/toolbar";
 import Transaction from "../components/Transaction";
 import { TransactionTableHead } from "../components/TransactionTableHead";
@@ -27,10 +25,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Transactions(props) {
+  const classes = useStyles();
+  // keyword is used to filter search result if any
   const [keyword, setKeyword] = useState("");
   const sortedData = props.transactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
+  // page and rowsPerPage are used in pagenation
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const rows = sortedData.map((transaction) => {
     return {
@@ -45,9 +48,8 @@ function Transactions(props) {
     };
   });
 
-  const classes = useStyles();
-
   const populateTable = () => {
+    // slice is used to show specific number of rows in pagenation
     return rows
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((row) => {
@@ -58,10 +60,7 @@ function Transactions(props) {
         else return;
       });
   };
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+  // below two functions are used for pagenation, determining the page and row number to show
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

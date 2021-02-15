@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
 import { connect } from "react-redux";
 import {
   Box,
@@ -15,31 +13,17 @@ import {
 import { Search as SearchIcon } from "react-feather";
 import TransactionForm from "./transactionForm";
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  importButton: {
-    marginRight: theme.spacing(1),
-  },
-  exportButton: {
-    marginRight: theme.spacing(1),
-  },
-}));
-
 const Toolbar = (props) => {
   const [showForm, setShowForm] = useState(false);
-
-  const classes = useStyles();
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-
   const handleChange = (event) => {
     props.setKeyword(event.target.value);
   };
 
   return (
-    <div className={clsx(classes.root)}>
+    <div>
       <Box display="flex" justifyContent="flex-end">
         <Button
           color="primary"
@@ -89,10 +73,6 @@ const Toolbar = (props) => {
     </div>
   );
 };
-
-// Toolbar.propTypes = {
-//   className: PropTypes.string,
-// };
 
 const mapStateToProps = (state) => {
   return { transactions: state.transactions.list };
