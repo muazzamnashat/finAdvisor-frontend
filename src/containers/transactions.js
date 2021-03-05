@@ -12,9 +12,6 @@ import { TransactionTableHead } from "../components/TransactionTableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 
 const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
   paper: {
     padding: theme.spacing(0),
     display: "flex",

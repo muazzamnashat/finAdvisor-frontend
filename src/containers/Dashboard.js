@@ -28,6 +28,7 @@ import Transactions from "./transactions";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Profile from "./Profile";
 import Tooltip from "@material-ui/core/Tooltip";
+import Bills from "./Bills";
 
 function Copyright() {
   return (
@@ -249,6 +250,7 @@ export default function Dashboard({ match, transactions }) {
               )}
             />
             <Route exact path="/profile" render={() => <Profile />} />
+            <Route exact path="/bills" render={() => <Bills />} />
           </Grid>
           <Box pt={4}>
             <Copyright />

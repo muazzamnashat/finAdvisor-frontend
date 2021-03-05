@@ -5,6 +5,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import ReceiptIcon from "@material-ui/icons/Receipt";
 import { useHistory } from "react-router-dom";
 
 export default function MainListItems() {
@@ -26,13 +27,13 @@ export default function MainListItems() {
         <ListItemText primary="Transactions" />
       </ListItem>
 
-      {/* <ListItem button>
+      {/* <ListItem button onClick={() => history.push("/bills")}>
         <ListItemIcon>
-          <PeopleIcon />
+          <ReceiptIcon />
         </ListItemIcon>
-        <ListItemText primary="Budgets" />
-      </ListItem>
-      <ListItem button>
+        <ListItemText primary="Bills" />
+      </ListItem> */}
+      {/* <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
