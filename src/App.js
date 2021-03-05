@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Dashboard from "./containers/Dashboard";
 import { connect } from "react-redux";
 import { fetchTransactions } from "./actions/fetchTransactions";
@@ -18,53 +18,57 @@ import {
 } from "./actions/transactionsSummary";
 import Backdrop from "./components/BackDrop";
 
-class App extends Component {
-  componentDidMount() {
+function App({
+  transactions,
+  userAlreadyLogged,
+  transactionLoading,
+  fetchTransactions,
+  fetchCategories,
+  autoLoginUser,
+  fetchTotalSpend,
+  fetchTotalIncome,
+}) {
+  useEffect(() => {
     if (localStorage.token) {
-      this.props.fetchTransactions();
-      this.props.fetchCategories();
+      fetchTransactions();
+      fetchCategories();
       // need autoLoginUser to save user information in redux store and show info on profile section
-      this.props.autoLoginUser();
-      this.props.fetchTotalSpend();
-      this.props.fetchTotalIncome();
+      autoLoginUser();
+      fetchTotalSpend();
+      fetchTotalIncome();
     }
-  }
+  }, []);
 
-  render() {
-    return (
-      <Router>
-        <div>
-          {this.props.transactionLoading ? <Backdrop /> : null}
+  return (
+    <Router>
+      <div>
+        {transactionLoading ? <Backdrop /> : null}
 
-          <Switch>
-            <Route path="/login">
-              {localStorage.token ? <Redirect to="/" /> : <Login />}
+        <Switch>
+          <Route path="/login">
+            {localStorage.token ? <Redirect to="/" /> : <Login />}
+          </Route>
+
+          <Route path="/signup">
+            {localStorage.token ? <Redirect to="/" /> : <SignUp />}
+          </Route>
+
+          {localStorage.token ? (
+            <Route
+              path="/"
+              render={(routerProps) => (
+                <Dashboard {...routerProps} transactions={transactions} />
+              )}
+            />
+          ) : (
+            <Route path="/">
+              <Redirect to="/login" />
             </Route>
-
-            <Route path="/signup">
-              {localStorage.token ? <Redirect to="/" /> : <SignUp />}
-            </Route>
-
-            {localStorage.token ? (
-              <Route
-                path="/"
-                render={(routerProps) => (
-                  <Dashboard
-                    {...routerProps}
-                    transactions={this.props.transactions}
-                  />
-                )}
-              />
-            ) : (
-              <Route path="/">
-                <Redirect to="/login" />
-              </Route>
-            )}
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
+          )}
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 const mapStateToProps = (state) => {
