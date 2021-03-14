@@ -4,7 +4,7 @@ _finAdvisor_ is a Single Page Application (SPA) that let users add, delete , upd
 
 See the app live here: https://finadvisor-client.netlify.app/login \
 frontend: https://github.com/muazzamnashat/finAdvisor-frontend \
-backend: https://github.com/muazzamnashat/finAdvisor-backend \
+backend: https://github.com/muazzamnashat/finAdvisor-backend
 
 ## Technologies used
 
