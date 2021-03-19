@@ -13,13 +13,13 @@ import {
 import { Search as SearchIcon } from "react-feather";
 import TransactionForm from "./transactionForm";
 
-const Toolbar = (props) => {
+export default function Toolbar({ setKeyword }) {
   const [showForm, setShowForm] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
   };
   const handleChange = (event) => {
-    props.setKeyword(event.target.value);
+    setKeyword(event.target.value);
   };
 
   return (
@@ -72,10 +72,4 @@ const Toolbar = (props) => {
       ) : null}
     </div>
   );
-};
-
-const mapStateToProps = (state) => {
-  return { transactions: state.transactions.list };
-};
-
-export default connect(mapStateToProps)(Toolbar);
+}

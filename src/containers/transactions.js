@@ -21,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Transactions(props) {
+function Transactions({ transactions }) {
   const classes = useStyles();
   // keyword is used to filter search result if any
   const [keyword, setKeyword] = useState("");
-  const sortedData = props.transactions.sort(
+  const sortedData = transactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
   // page and rowsPerPage are used in pagenation
