@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -8,13 +8,6 @@ import { connect } from "react-redux";
 import { addTransaction } from "../actions/fetchTransactions";
 
 function TransactionForm({ categories, setShowForm, addTransaction }) {
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
-  const [category_id, setCategory_id] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [deposit, setDeposit] = useState("");
-  const [disabled, setDisabled] = useState(true);
-
   const useStyles = makeStyles((theme) => ({
     root: {
       "& .MuiTextField-root": {
@@ -27,39 +20,27 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
     },
   }));
   const classes = useStyles();
-  const validateForm = () => {
-    date && description && category_id && amount
-      ? setDisabled(false)
-      : setDisabled(true);
-  };
-  const handleChange = (event) => {
-    validateForm();
-    event.preventDefault();
-    switch (event.target.name) {
-      case "date":
-        setDate(event.target.value);
-        break;
-      case "description":
-        setDescription(event.target.value);
-        break;
-      case "category":
-        setCategory_id(event.target.value);
-        break;
-      case "amount":
-        setAmount(event.target.value);
-        break;
-      case "type":
-        setDeposit(event.target.value);
-        break;
-      default:
-        break;
-    }
+
+  const initialState = {
+    date: "",
+    description: "",
+    category_id: "",
+    amount: 0,
+    deposit: "",
+    disabled: true,
   };
 
-  const handleSubmit = (event) => {
+  const reducer = (state, action) => {
+    const { type, payload } = action;
+    return { ...state, [type]: payload };
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { date, description, category_id, amount, deposit } = state;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const data = { date, category_id, amount, description, deposit };
-    // debugger;
-    // console.log(data);
     addTransaction({ transaction: data });
     setShowForm(false);
   };
@@ -75,21 +56,25 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
         <TextField
           type="date"
           name="date"
-          onChange={handleChange}
+          onChange={(e) => dispatch({ type: "date", payload: e.target.value })}
           helperText="Date of the transaction"
         />
 
         <TextField
           type="text"
           name="description"
-          onChange={handleChange}
+          onChange={(e) =>
+            dispatch({ type: "description", payload: e.target.value })
+          }
           helperText="Describe the transaction"
         />
 
         <TextField
           type="number"
           name="amount"
-          onChange={handleChange}
+          onChange={(e) =>
+            dispatch({ type: "amount", payload: e.target.value })
+          }
           helperText="Amount"
         />
 
@@ -97,7 +82,10 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
           select
           name="category"
           value={category_id}
-          onChange={handleChange}
+          onChange={(e) => {
+            e.preventDefault();
+            dispatch({ type: "category_id", payload: e.target.value });
+          }}
           helperText="Please select a category"
         >
           {categories.map((category, index) => (
@@ -111,7 +99,9 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
           select
           name="type"
           value={deposit}
-          onChange={handleChange}
+          onChange={(e) =>
+            dispatch({ type: "deposit", payload: e.target.value })
+          }
           helperText="Please select type"
         >
           [ <MenuItem value={true}>Deposit</MenuItem>,
@@ -120,7 +110,9 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
       </div>
 
       <Button
-        disabled={disabled}
+        disabled={
+          !(date && description && category_id && amount && deposit !== "")
+        }
         type="submit"
         variant="contained"
         color="primary"
