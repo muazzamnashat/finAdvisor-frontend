@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -44,6 +44,10 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
     addTransaction({ transaction: data });
     setShowForm(false);
   };
+  
+  const handleOnChange = useCallback(({ target: { name, value } }) => {
+    dispatch({ type: name, payload: value })
+}, [])
 
   return (
     <form
@@ -56,36 +60,29 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
         <TextField
           type="date"
           name="date"
-          onChange={(e) => dispatch({ type: "date", payload: e.target.value })}
+          onChange={handleOnChange}
           helperText="Date of the transaction"
         />
 
         <TextField
           type="text"
           name="description"
-          onChange={(e) =>
-            dispatch({ type: "description", payload: e.target.value })
-          }
+          onChange={handleOnChange}
           helperText="Describe the transaction"
         />
 
         <TextField
           type="number"
           name="amount"
-          onChange={(e) =>
-            dispatch({ type: "amount", payload: e.target.value })
-          }
+          onChange={handleOnChange}
           helperText="Amount"
         />
 
         <TextField
           select
-          name="category"
+          name="category_id"
           value={category_id}
-          onChange={(e) => {
-            e.preventDefault();
-            dispatch({ type: "category_id", payload: e.target.value });
-          }}
+          onChange={handleOnChange}
           helperText="Please select a category"
         >
           {categories.map((category) => (
@@ -97,11 +94,9 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
 
         <TextField
           select
-          name="type"
+          name="deposit"
           value={deposit}
-          onChange={(e) =>
-            dispatch({ type: "deposit", payload: e.target.value })
-          }
+          onChange={handleOnChange}
           helperText="Please select type"
         >
           [ <MenuItem value={true}>Deposit</MenuItem>,
@@ -126,10 +121,7 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categories,
-  };
-};
+const mapStateToProps = ({ categories }) => ({ categories });
+const mapDispatchToProps = { addTransaction };
 
-export default connect(mapStateToProps, { addTransaction })(TransactionForm);
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);
