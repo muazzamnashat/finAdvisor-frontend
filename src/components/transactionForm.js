@@ -88,8 +88,8 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
           }}
           helperText="Please select a category"
         >
-          {categories.map((category, index) => (
-            <MenuItem key={index} value={category.id}>
+          {categories.map((category) => (
+            <MenuItem key={category.name} value={category.id}>
               {category.name}
             </MenuItem>
           ))}
