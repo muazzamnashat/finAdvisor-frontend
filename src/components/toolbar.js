@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import {
   Box,
   Button,
@@ -8,7 +7,6 @@ import {
   TextField,
   InputAdornment,
   SvgIcon,
-  makeStyles,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "react-feather";
 import TransactionForm from "./transactionForm";

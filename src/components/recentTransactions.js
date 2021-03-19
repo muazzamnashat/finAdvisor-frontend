@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecentTransactions(props) {
-  const rows = props.transactions.map((transaction) => {
+export default function RecentTransactions({ transactions }) {
+  const rows = transactions.map((transaction) => {
     return {
       id: transaction.id,
       date: transaction.date,

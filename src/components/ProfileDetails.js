@@ -12,7 +12,7 @@ import {
 import { updateUser } from "../actions/userActions";
 import { connect } from "react-redux";
 
-function ProfileDetails(props) {
+function ProfileDetails({ user, updateUser }) {
   const [first_name, setFname] = useState(null);
   const [last_name, setLname] = useState(null);
   const [email, setEmail] = useState(null);
@@ -21,13 +21,13 @@ function ProfileDetails(props) {
   const [gender, setGender] = useState(null);
 
   useEffect(() => {
-    setFname(props.user.first_name);
-    setLname(props.user.last_name);
-    setEmail(props.user.email);
-    setIncome(props.user.income);
-    setAge(props.user.age);
-    setGender(props.user.gender);
-  }, [props]);
+    setFname(user.first_name);
+    setLname(user.last_name);
+    setEmail(user.email);
+    setIncome(user.income);
+    setAge(user.age);
+    setGender(user.gender);
+  }, [user]);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -59,7 +59,7 @@ function ProfileDetails(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { first_name, last_name, email, income, age, gender };
-    props.updateUser(data);
+    updateUser(data);
   };
 
   return (
