@@ -257,12 +257,7 @@ class Transaction extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categories,
-  };
-};
-
+const mapStateToProps = ({ categories }) => ({ categories });
 export default connect(mapStateToProps, {
   updateTransaction,
   deleteTransaction,

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Summary({summary}){
+function Summary({ summary }) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const today = new Date();
@@ -38,10 +38,7 @@ function Summary({summary}){
         <Paper className={fixedHeightPaper}>
           <Title>Total spending this month</Title>
           <Typography component="p" variant="h6">
-            $
-            {summary.total_spend
-              ? summary.total_spend[currentMonth]
-              : null}
+            ${summary.total_spend ? summary.total_spend[currentMonth] : null}
           </Typography>
           {/* <Typography color="textSecondary" className={classes.depositContext}>
             as of <Moment format="D MMM YYYY">{today}</Moment>
@@ -49,10 +46,7 @@ function Summary({summary}){
 
           <Title>Total income this month</Title>
           <Typography component="p" variant="h6">
-            $
-            {summary.total_income
-              ? summary.total_income[currentMonth]
-              : null}
+            ${summary.total_income ? summary.total_income[currentMonth] : null}
           </Typography>
           <Typography color="textSecondary" className={classes.depositContext}>
             as of <Moment format="D MMM YYYY">{today}</Moment>
@@ -69,7 +63,5 @@ function Summary({summary}){
   );
 }
 
-const mapStateToProps = (state) => {
-  return { summary: state.summary };
-};
+const mapStateToProps = ({ summary }) => ({ summary });
 export default connect(mapStateToProps)(Summary);

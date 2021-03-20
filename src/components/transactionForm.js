@@ -44,10 +44,10 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
     addTransaction({ transaction: data });
     setShowForm(false);
   };
-  
+
   const handleOnChange = useCallback(({ target: { name, value } }) => {
-    dispatch({ type: name, payload: value })
-}, [])
+    dispatch({ type: name, payload: value });
+  }, []);
 
   return (
     <form
@@ -122,6 +122,5 @@ function TransactionForm({ categories, setShowForm, addTransaction }) {
 }
 
 const mapStateToProps = ({ categories }) => ({ categories });
-const mapDispatchToProps = { addTransaction };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);
+export default connect(mapStateToProps, { addTransaction })(TransactionForm);
