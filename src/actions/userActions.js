@@ -1,5 +1,5 @@
-// const ROOT_URL = "http://localhost:3000/api/v1";
-const ROOT_URL = "https://protected-citadel-71435.herokuapp.com/api/v1";
+const ROOT_URL = "http://localhost:3000/api/v1";
+// const ROOT_URL = "https://protected-citadel-71435.herokuapp.com/api/v1";
 
 import { fetchTransactions } from "./fetchTransactions";
 import { fetchCategories } from "./fetchCategories";
